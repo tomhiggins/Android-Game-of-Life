@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="hello">Hello World, AndroidGameOfLifeActivity!</string>
+    <string name="app_name">Android Game of Life</string>
+    <string name="startgame">Start</string>
+    <string name="stopgame">Stop</string>
+    <string name="death">Death</string>
+    <string name="birth">Birth</string>
+    <string name="s1">1</string>
+    <string name="s2">2</string>
+    <string name="s3">3</string>
+    <string name="s4">4</string>
+    <string name="s5">5</string>
+    <string name="s6">6</string>
+    <string name="s7">7</string>
+    <string name="s8"></string>
+    <string name="s9">9</string>
+    <string name="Neighbours">Neighbours:</string>
+    <string name="ruleeditor">Rule Editor</string>
+
+</resources>
