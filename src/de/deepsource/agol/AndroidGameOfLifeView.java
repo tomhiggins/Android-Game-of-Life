@@ -13,8 +13,8 @@ import java.util.Random;
  * @author Sebastian Ullrich
  * @mood self-doubting
  * 
- * This is the super unified jack of all trades class. 
- * No more confusing Model-View-Controller madness.
+ *       This is the super unified jack of all trades class. No more confusing
+ *       Model-View-Controller madness.
  */
 public final class AndroidGameOfLifeView extends View {
 
@@ -29,7 +29,9 @@ public final class AndroidGameOfLifeView extends View {
 
 	/**
 	 * Constructor.
-	 * @param context Context
+	 * 
+	 * @param context
+	 *            Context
 	 */
 	public AndroidGameOfLifeView(Context context) {
 		super(context);
@@ -56,7 +58,9 @@ public final class AndroidGameOfLifeView extends View {
 
 	/**
 	 * Method to draw a boolean array.
-	 * @param m array of boolean
+	 * 
+	 * @param m
+	 *            array of boolean
 	 */
 	private void drawMap(boolean[][] m) {
 		this.map = m;
@@ -70,20 +74,21 @@ public final class AndroidGameOfLifeView extends View {
 		map = new boolean[RuleSet.HEIGHT][RuleSet.WIDTH];
 		
 		/**
-		 * Fills the map with (don't tell anybody) random values. 
+		 * Fills the map with (don't tell anybody) random values.
 		 */
-		for(int i = 0; i < 9; i++){
-			for(int j = 0; j < RuleSet.WIDTH; j++){
-				map[i][j] = new Random().nextBoolean();
-			}
-		}
+		for (int i = 0; i < RuleSet.HEIGHT; i++)
+			for (int j = 0; j < RuleSet.WIDTH; j++)
+				if (new Random().nextInt(5) == 2)
+					map[i][j] = true;
+				else
+					map[i][j] = false;
 	}
 
 	/**
 	 * Super techy android stuff!
 	 */
 	public boolean onTouchEvent(MotionEvent event) {
-		
+
 		if (event.getAction() == MotionEvent.ACTION_DOWN
 				| event.getAction() == MotionEvent.ACTION_MOVE) {
 			map[(int) event.getY() / RuleSet.CELL_SIZE][(int) event.getX()
@@ -110,6 +115,7 @@ public final class AndroidGameOfLifeView extends View {
 
 	/**
 	 * This will return the current map
+	 * 
 	 * @return Game of Life map.
 	 */
 	public boolean[][] getMap() {
@@ -118,14 +124,16 @@ public final class AndroidGameOfLifeView extends View {
 
 	/**
 	 * MAIN GAME LOGIC. This method will draw a lot of screenmagic.
-	 * @param rule Game of Life RuleSet
+	 * 
+	 * @param rule
+	 *            Game of Life RuleSet
 	 */
 	public void runLoop(final RuleSet rule) {
 		new Thread(new Runnable() {
-			
+
 			@Override
 			public void run() {
-				
+
 				/**
 				 * This will be the neigbourhood of interest.
 				 */
@@ -135,15 +143,15 @@ public final class AndroidGameOfLifeView extends View {
 				 * The Animation loop.
 				 */
 				while (LOCKED) {
-					
+
 					/**
 					 * Generation that will life the next cycle.
 					 */
 					boolean[][] nextGen = new boolean[RuleSet.HEIGHT][RuleSet.WIDTH];
-					
+
 					/**
-					 * AFTER HOURS OF SERIOUS BRAIN MALFUNCTIONS,
-					 * I CAME UP WITH THIS ... ¯\_(ツ)_/¯ !!!
+					 * AFTER HOURS OF SERIOUS BRAIN MALFUNCTIONS, I CAME UP WITH
+					 * THIS ... ¯\_(ツ)_/¯ !!!
 					 */
 					for (int h = 0; h < RuleSet.HEIGHT; h++) {
 						for (int w = 0; w < RuleSet.WIDTH; w++) {
