@@ -6,7 +6,6 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 
@@ -193,20 +192,6 @@ public final class AndroidGameOfLifeView extends View {
 		map[xOffset + 16][yOffset + 13] = true;
 		map[xOffset + 16][yOffset + 14] = true;
 		
-	}
-	
-	public String debugMap() {
-		String timmy = "";
-		
-		/**
-		 * Fills the map with (don't tell anybody) random values.
-		 */
-		for (int i = 0; i < RuleSet.HEIGHT; i++)
-			for (int j = 0; j < RuleSet.WIDTH; j++)
-				if(map[i][j] == true)
-					timmy += "map[xOffset + " + i + "][yOffset + " + j + "] = true;\n";
-		
-		return timmy;
 	}
 
 	/**

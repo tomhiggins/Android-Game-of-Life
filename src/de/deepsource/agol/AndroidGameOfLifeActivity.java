@@ -57,13 +57,11 @@ public class AndroidGameOfLifeActivity extends Activity {
 			break;
 			
 		case R.id.item3:
-			Log.e("err", agolView.debugMap());
-			
-			/*final Intent intent = new Intent(
+			final Intent intent = new Intent(
 					getApplicationContext(),
 					RuleEditorActivity.class);
 
-			startActivity(intent);*/
+			startActivity(intent);
 			break;
 		}
 		return true;
