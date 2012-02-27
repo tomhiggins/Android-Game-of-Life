@@ -1,23 +1,28 @@
 package de.deepsource.agol.rules;
 
+import de.deepsource.agol.Agol;
+
 /**
  * @author Sebastian Ullrich
  */
-public class Conway extends RuleSet{
-	
+public class Conway extends RuleSet {
+
 	/**
 	 * Game of Life -- Conway Rules
 	 */
-	public Conway(){
-		gameRule[0] = RuleSet.DEATH_RULE;
-		gameRule[1] = RuleSet.DEATH_RULE;
-		gameRule[2] = RuleSet.UNDEFINED;
-		gameRule[3] = RuleSet.BIRTH_RULE;
-		gameRule[4] = RuleSet.DEATH_RULE;
-		gameRule[5] = RuleSet.DEATH_RULE;
-		gameRule[6] = RuleSet.DEATH_RULE;
-		gameRule[7] = RuleSet.DEATH_RULE;
-		gameRule[8] = RuleSet.DEATH_RULE;
+	public Conway() {
+		int[] gameRule = new int[9];
+		gameRule[0] = Agol.DEATH_RULE;
+		gameRule[1] = Agol.DEATH_RULE;
+		gameRule[2] = Agol.UNDEFINED;
+		gameRule[3] = Agol.BIRTH_RULE;
+		gameRule[4] = Agol.DEATH_RULE;
+		gameRule[5] = Agol.DEATH_RULE;
+		gameRule[6] = Agol.DEATH_RULE;
+		gameRule[7] = Agol.DEATH_RULE;
+		gameRule[8] = Agol.DEATH_RULE;
+
+		Agol.setGameRule(gameRule);
 	}
-	
+
 }

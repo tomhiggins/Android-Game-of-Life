@@ -7,6 +7,24 @@ import android.app.Application;
  * constants.
  */
 public class Agol extends Application {
+	
+	/**
+	 * Identifier for the fact, that the rule is undefined.
+	 */
+	public static final int UNDEFINED = 0;
+	
+	/**
+	 * Identifier for the birth rule.
+	 */
+	public static final int BIRTH_RULE = 1;
+	
+	/**
+	 * Identifier for the death rule.
+	 */
+	public static final int DEATH_RULE = 2;
+	
+	private static int[] gameRule = new int[9];
+	
 	/**
 	 * The width of the device.
 	 */
@@ -17,6 +35,14 @@ public class Agol extends Application {
 	 */
 	private static int viewportHeight;
 	
+	public static int[] getGameRule() {
+		return gameRule;
+	}
+
+	public static void setGameRule(int[] newGameRule) {
+		gameRule = newGameRule;
+	}
+
 	/**
 	 * Getter for {@link Agol#viewportWidth}.
 	 *
