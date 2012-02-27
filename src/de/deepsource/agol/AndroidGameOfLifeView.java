@@ -264,7 +264,7 @@ public final class AndroidGameOfLifeView extends View {
 					 */
 					boolean[][] nextGen = new boolean[RuleSet.HEIGHT][RuleSet.WIDTH];
 
-					/**
+					/*
 					 * AFTER HOURS OF SERIOUS BRAIN MALFUNCTIONS,
 					 * I CAME UP WITH THIS ... !!!
 					 * 00 01 02
