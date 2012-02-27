@@ -5,9 +5,9 @@ import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
-import java.util.Random;
 
 /**
  * @author Sebastian Ullrich
@@ -35,6 +35,20 @@ public final class AndroidGameOfLifeView extends View {
 	 */
 	public AndroidGameOfLifeView(Context context) {
 		super(context);
+		init();
+	}
+	
+	public AndroidGameOfLifeView(Context context, AttributeSet attrs) {
+		super(context, attrs);
+		init();
+	}
+	
+	public AndroidGameOfLifeView(Context context, AttributeSet attrs, int defSytle) {
+		super(context, attrs, defSytle);
+		init();
+	}
+	
+	private void init() {
 		paint.setColor(Color.GREEN);
 		white.setColor(Color.BLACK);
 		initMap();
@@ -76,12 +90,12 @@ public final class AndroidGameOfLifeView extends View {
 		/**
 		 * Fills the map with (don't tell anybody) random values.
 		 */
-		for (int i = 0; i < RuleSet.HEIGHT; i++)
+		/*for (int i = 0; i < RuleSet.HEIGHT; i++)
 			for (int j = 0; j < RuleSet.WIDTH; j++)
 				if (new Random().nextInt(5) == 2)
 					map[i][j] = true;
 				else
-					map[i][j] = false;
+					map[i][j] = false;*/
 	}
 
 	/**
@@ -150,37 +164,48 @@ public final class AndroidGameOfLifeView extends View {
 					boolean[][] nextGen = new boolean[RuleSet.HEIGHT][RuleSet.WIDTH];
 
 					/**
-					 * AFTER HOURS OF SERIOUS BRAIN MALFUNCTIONS, I CAME UP WITH
-					 * THIS ... ¯\_(ツ)_/¯ !!!
+					 * AFTER HOURS OF SERIOUS BRAIN MALFUNCTIONS,
+					 * I CAME UP WITH THIS ... ¯\_(ツ)_/¯ !!!
+					 * 00 01 02
+					 * 10 11 12		<- 11 is our Cell everything else it's neighbours
+					 * 20 21 22
 					 */
 					for (int h = 0; h < RuleSet.HEIGHT; h++) {
 						for (int w = 0; w < RuleSet.WIDTH; w++) {
 
 							// first row
 							// 00
-							if (h - 1 >= 0 & w - 1 >= 0)
+							if (h - 1 >= 0 && w - 1 >= 0)
 								region[0][0] = map[h - 1][w - 1];
-							else
-								region[0][0] = false;
+							else if (h - 1 < 0 && w - 1 >= 0)
+								region[0][0] = map[RuleSet.HEIGHT - 1][w - 1];
+							else if (h - 1 >= 0 && w - 1 < 0)
+								region[0][0] = map[h - 1][RuleSet.WIDTH - 1];
+							else if (h - 1 < 0 && w - 1 < 0)
+								region[0][0] = map[RuleSet.HEIGHT - 1][RuleSet.WIDTH - 1];
 
 							// 01
 							if (h - 1 >= 0)
 								region[0][1] = map[h - 1][w];
 							else
-								region[0][1] = false;
+								region[0][1] = map[RuleSet.HEIGHT - 1][w];
 
 							// 02
-							if (h - 1 >= 0 & w < RuleSet.WIDTH - 1)
+							if (h - 1 >= 0 && w < RuleSet.WIDTH - 1)
 								region[0][2] = map[h - 1][w + 1];
-							else
-								region[0][2] = false;
+							else if (h - 1 < 0 && w < RuleSet.WIDTH - 1)
+								region[0][2] = map[RuleSet.HEIGHT - 1][w + 1];
+							else if (h - 1 >= 0 && w >= RuleSet.WIDTH - 1)
+								region[0][2] = map[h - 1][0];
+							else if (h - 1 < 0 && w >= RuleSet.WIDTH - 1)
+								region[0][2] = map[RuleSet.HEIGHT - 1][0];
 
 							// middle row
 							// 10
 							if (w - 1 >= 0)
 								region[1][0] = map[h][w - 1];
 							else
-								region[1][0] = false;
+								region[1][0] = map[h][RuleSet.WIDTH - 1];
 
 							// 11
 							region[1][1] = map[h][w];
@@ -189,26 +214,34 @@ public final class AndroidGameOfLifeView extends View {
 							if (w < RuleSet.WIDTH - 1)
 								region[1][2] = map[h][w + 1];
 							else
-								region[1][2] = false;
+								region[1][2] = map[h][0];
 
 							// last row
 							// 20
-							if (h < RuleSet.HEIGHT - 1 & w - 1 >= 0)
+							if (h < RuleSet.HEIGHT - 1 && w - 1 >= 0)
 								region[2][0] = map[h + 1][w - 1];
-							else
-								region[2][0] = false;
+							else if (h >= RuleSet.HEIGHT - 1 && w - 1 >= 0)
+								region[2][0] = map[0][w - 1];
+							else if (h < RuleSet.HEIGHT - 1 && w - 1 < 0)
+								region[2][0] = map[h + 1][RuleSet.WIDTH - 1];
+							else if (h >= RuleSet.HEIGHT - 1 && w - 1 < 0)
+								region[2][0] = map[0][RuleSet.WIDTH - 1];
 
 							// 21
 							if (h < RuleSet.HEIGHT - 1)
 								region[2][1] = map[h + 1][w];
 							else
-								region[2][1] = false;
+								region[2][1] = map[0][w];
 
 							// 22
-							if (h < RuleSet.HEIGHT - 1 & w < RuleSet.WIDTH - 1)
+							if (h < RuleSet.HEIGHT - 1 && w < RuleSet.WIDTH - 1)
 								region[2][2] = map[h + 1][w + 1];
-							else
-								region[2][2] = false;
+							else if (h >= RuleSet.HEIGHT - 1 && w < RuleSet.WIDTH - 1)
+								region[2][2] = map[0][w + 1];
+							else if (h < RuleSet.HEIGHT - 1 && w >= RuleSet.WIDTH - 1)
+								region[2][2] = map[h + 1][0];
+							else if (h >= RuleSet.HEIGHT - 1 && w >= RuleSet.WIDTH - 1)
+								region[2][2] = map[0][0];
 
 							// ----------------------------
 							nextGen[h][w] = rule.apply(region);

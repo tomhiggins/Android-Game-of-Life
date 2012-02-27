@@ -1,227 +1,243 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/LinearLayout1"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical" >
+<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/TableLayout1"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:stretchColumns="0" >
 
-    <LinearLayout
-        android:id="@+id/linearLayout3"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" >
+    <TableRow android:layout_marginTop="10dip" >
 
         <TextView
-            android:id="@+id/textView2"
-            android:layout_width="130dp"
-            android:paddingTop="20dp"
-            android:layout_height="wrap_content"
-            android:gravity="center"
+            android:id="@+id/textViewNeighbourHeader"
+            android:layout_gravity="center"
             android:text="@string/Neighbours"
             android:textAppearance="?android:attr/textAppearanceMedium" />
-    </LinearLayout>
+
+    </TableRow>
+
+    <TableRow>
+
+        <TextView
+            android:id="@+id/textView0"
+            android:layout_gravity="center"
+            android:text="@string/s0" />
+
+        <RadioGroup
+            android:id="@+id/radioGroup0"
+            android:layout_marginRight="20dip"
+            android:orientation="horizontal" >
+
+            <RadioButton
+                android:id="@+id/radioBirth0"
+                android:layout_marginRight="15dip"
+                android:checked="true"
+                android:text="@string/birth" />
+
+            <RadioButton
+                android:id="@+id/radioDeath0"
+                android:text="@string/death" />
+        </RadioGroup>
+        
+    </TableRow>
     
-    <LinearLayout
-        android:id="@+id/linearLayout3"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" >
+    <TableRow>
+
+        <TextView
+            android:id="@+id/textView1"
+            android:layout_gravity="center"
+            android:text="@string/s1" />
+
+        <RadioGroup
+            android:id="@+id/radioGroup1"
+            android:layout_marginRight="20dip"
+            android:orientation="horizontal" >
+
+            <RadioButton
+                android:id="@+id/radioBirth1"
+                android:layout_marginRight="15dip"
+                android:checked="true"
+                android:text="@string/birth" />
+
+            <RadioButton
+                android:id="@+id/radioDeath1"
+                android:text="@string/death" />
+        </RadioGroup>
+        
+    </TableRow>
+    
+    <TableRow>
 
         <TextView
             android:id="@+id/textView2"
-            android:layout_width="130dp"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:text="@string/s1"
-            android:textAppearance="?android:attr/textAppearanceMedium" />
+            android:layout_gravity="center"
+            android:text="@string/s2" />
 
-        <Spinner
-            android:id="@+id/spinner1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:entries="@string/s1" />
+        <RadioGroup
+            android:id="@+id/radioGroup2"
+            android:layout_marginRight="20dip"
+            android:orientation="horizontal" >
 
-    </LinearLayout>
+            <RadioButton
+                android:id="@+id/radioBirth2"
+                android:layout_marginRight="15dip"
+                android:checked="true"
+                android:text="@string/birth" />
 
-    <LinearLayout
-        android:id="@+id/linearLayout3"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" >
-
-        <TextView
-            android:id="@+id/textView2"
-            android:layout_width="130dp"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:text="@string/s2"
-            android:textAppearance="?android:attr/textAppearanceMedium" />
-
-        <RadioButton
-            android:id="@+id/radioButton1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/birth" />
-
-        <RadioButton
-            android:id="@+id/radioButton2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/death" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/linearLayout3"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" >
+            <RadioButton
+                android:id="@+id/radioDeath2"
+                android:text="@string/death" />
+        </RadioGroup>
+        
+    </TableRow>
+    
+    <TableRow>
 
         <TextView
-            android:id="@+id/textView2"
-            android:layout_width="130dp"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:text="@string/s3"
-            android:textAppearance="?android:attr/textAppearanceMedium" />
+            android:id="@+id/textView3"
+            android:layout_gravity="center"
+            android:text="@string/s3" />
 
-        <RadioButton
-            android:id="@+id/radioButton1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/birth" />
+        <RadioGroup
+            android:id="@+id/radioGroup3"
+            android:layout_marginRight="20dip"
+            android:orientation="horizontal" >
 
-        <RadioButton
-            android:id="@+id/radioButton2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/death" />
-    </LinearLayout>
+            <RadioButton
+                android:id="@+id/radioBirth3"
+                android:layout_marginRight="15dip"
+                android:checked="true"
+                android:text="@string/birth" />
 
-    <LinearLayout
-        android:id="@+id/linearLayout3"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" >
-
-        <TextView
-            android:id="@+id/textView2"
-            android:layout_width="130dp"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:text="@string/s4"
-            android:textAppearance="?android:attr/textAppearanceMedium" />
-
-        <RadioButton
-            android:id="@+id/radioButton1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/birth" />
-
-        <RadioButton
-            android:id="@+id/radioButton2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/death" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/linearLayout3"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" >
+            <RadioButton
+                android:id="@+id/radioDeath3"
+                android:text="@string/death" />
+        </RadioGroup>
+        
+    </TableRow>
+    
+    <TableRow>
 
         <TextView
-            android:id="@+id/textView2"
-            android:layout_width="130dp"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:text="@string/s5"
-            android:textAppearance="?android:attr/textAppearanceMedium" />
+            android:id="@+id/textView4"
+            android:layout_gravity="center"
+            android:text="@string/s4" />
 
-        <RadioButton
-            android:id="@+id/radioButton1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/birth" />
+        <RadioGroup
+            android:id="@+id/radioGroup4"
+            android:layout_marginRight="20dip"
+            android:orientation="horizontal" >
 
-        <RadioButton
-            android:id="@+id/radioButton2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/death" />
-    </LinearLayout>
+            <RadioButton
+                android:id="@+id/radioBirth4"
+                android:layout_marginRight="15dip"
+                android:checked="true"
+                android:text="@string/birth" />
 
-    <LinearLayout
-        android:id="@+id/linearLayout3"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" >
-
-        <TextView
-            android:id="@+id/textView2"
-            android:layout_width="130dp"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:text="@string/s6"
-            android:textAppearance="?android:attr/textAppearanceMedium" />
-
-        <RadioButton
-            android:id="@+id/radioButton1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/birth" />
-
-        <RadioButton
-            android:id="@+id/radioButton2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/death" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/linearLayout3"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" >
+            <RadioButton
+                android:id="@+id/radioDeath4"
+                android:text="@string/death" />
+        </RadioGroup>
+        
+    </TableRow>
+    
+    <TableRow>
 
         <TextView
-            android:id="@+id/textView2"
-            android:layout_width="130dp"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:text="@string/s7"
-            android:textAppearance="?android:attr/textAppearanceMedium" />
+            android:id="@+id/textView5"
+            android:layout_gravity="center"
+            android:text="@string/s5" />
 
-        <RadioButton
-            android:id="@+id/radioButton1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/birth" />
+        <RadioGroup
+            android:id="@+id/radioGroup5"
+            android:layout_marginRight="20dip"
+            android:orientation="horizontal" >
 
-        <RadioButton
-            android:id="@+id/radioButton2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/death" />
-    </LinearLayout>
+            <RadioButton
+                android:id="@+id/radioBirth5"
+                android:layout_marginRight="15dip"
+                android:checked="true"
+                android:text="@string/birth" />
 
-    <LinearLayout
-        android:id="@+id/linearLayout3"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" >
+            <RadioButton
+                android:id="@+id/radioDeath5"
+                android:text="@string/death" />
+        </RadioGroup>
+        
+    </TableRow>
+    
+    <TableRow>
 
         <TextView
-            android:id="@+id/textView2"
-            android:layout_width="130dp"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:text="@string/s9"
-            android:textAppearance="?android:attr/textAppearanceMedium" />
+            android:id="@+id/textView6"
+            android:layout_gravity="center"
+            android:text="@string/s6" />
 
-        <RadioButton
-            android:id="@+id/radioButton1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/birth" />
+        <RadioGroup
+            android:id="@+id/radioGroup6"
+            android:layout_marginRight="20dip"
+            android:orientation="horizontal" >
 
-        <RadioButton
-            android:id="@+id/radioButton2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/death" />
-    </LinearLayout>
+            <RadioButton
+                android:id="@+id/radioBirth6"
+                android:layout_marginRight="15dip"
+                android:checked="true"
+                android:text="@string/birth" />
 
-</LinearLayout>
+            <RadioButton
+                android:id="@+id/radioDeath6"
+                android:text="@string/death" />
+        </RadioGroup>
+        
+    </TableRow>
+    
+    <TableRow>
+
+        <TextView
+            android:id="@+id/textView7"
+            android:layout_gravity="center"
+            android:text="@string/s7" />
+
+        <RadioGroup
+            android:id="@+id/radioGroup7"
+            android:layout_marginRight="20dip"
+            android:orientation="horizontal" >
+
+            <RadioButton
+                android:id="@+id/radioBirth7"
+                android:layout_marginRight="15dip"
+                android:checked="true"
+                android:text="@string/birth" />
+
+            <RadioButton
+                android:id="@+id/radioDeath7"
+                android:text="@string/death" />
+        </RadioGroup>
+        
+    </TableRow>
+    
+    <TableRow>
+
+        <TextView
+            android:id="@+id/textView8"
+            android:layout_gravity="center"
+            android:text="@string/s8" />
+
+        <RadioGroup
+            android:id="@+id/radioGroup8"
+            android:layout_marginRight="20dip"
+            android:orientation="horizontal" >
+
+            <RadioButton
+                android:id="@+id/radioBirth8"
+                android:layout_marginRight="15dip"
+                android:checked="true"
+                android:text="@string/birth" />
+
+            <RadioButton
+                android:id="@+id/radioDeath8"
+                android:text="@string/death" />
+        </RadioGroup>
+        
+    </TableRow>
+
+</TableLayout>
