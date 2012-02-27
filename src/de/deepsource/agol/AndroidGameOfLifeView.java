@@ -6,6 +6,7 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 
@@ -87,15 +88,125 @@ public final class AndroidGameOfLifeView extends View {
 	public void initMap() {
 		map = new boolean[RuleSet.HEIGHT][RuleSet.WIDTH];
 		
+		int xOffset = RuleSet.HEIGHT / 2 - 10;
+		int yOffset = RuleSet.WIDTH / 2 - 7;
+		
+		/**
+		 * Printing Logo screen (16 * 14 cells)
+		 */
+		map[xOffset + 0][yOffset + 0] = true;
+		map[xOffset + 0][yOffset + 1] = true;
+		map[xOffset + 0][yOffset + 2] = true;
+		map[xOffset + 0][yOffset + 4] = true;
+		map[xOffset + 0][yOffset + 5] = true;
+		map[xOffset + 0][yOffset + 6] = true;
+		map[xOffset + 0][yOffset + 8] = true;
+		map[xOffset + 0][yOffset + 10] = true;
+		map[xOffset + 0][yOffset + 12] = true;
+		map[xOffset + 0][yOffset + 13] = true;
+		map[xOffset + 0][yOffset + 14] = true;
+		map[xOffset + 1][yOffset + 0] = true;
+		map[xOffset + 1][yOffset + 4] = true;
+		map[xOffset + 1][yOffset + 6] = true;
+		map[xOffset + 1][yOffset + 8] = true;
+		map[xOffset + 1][yOffset + 9] = true;
+		map[xOffset + 1][yOffset + 10] = true;
+		map[xOffset + 1][yOffset + 12] = true;
+		map[xOffset + 2][yOffset + 0] = true;
+		map[xOffset + 2][yOffset + 2] = true;
+		map[xOffset + 2][yOffset + 4] = true;
+		map[xOffset + 2][yOffset + 5] = true;
+		map[xOffset + 2][yOffset + 6] = true;
+		map[xOffset + 2][yOffset + 8] = true;
+		map[xOffset + 2][yOffset + 10] = true;
+		map[xOffset + 2][yOffset + 12] = true;
+		map[xOffset + 2][yOffset + 13] = true;
+		map[xOffset + 3][yOffset + 0] = true;
+		map[xOffset + 3][yOffset + 2] = true;
+		map[xOffset + 3][yOffset + 4] = true;
+		map[xOffset + 3][yOffset + 6] = true;
+		map[xOffset + 3][yOffset + 8] = true;
+		map[xOffset + 3][yOffset + 10] = true;
+		map[xOffset + 3][yOffset + 12] = true;
+		map[xOffset + 4][yOffset + 0] = true;
+		map[xOffset + 4][yOffset + 1] = true;
+		map[xOffset + 4][yOffset + 2] = true;
+		map[xOffset + 4][yOffset + 4] = true;
+		map[xOffset + 4][yOffset + 6] = true;
+		map[xOffset + 4][yOffset + 8] = true;
+		map[xOffset + 4][yOffset + 10] = true;
+		map[xOffset + 4][yOffset + 12] = true;
+		map[xOffset + 4][yOffset + 13] = true;
+		map[xOffset + 4][yOffset + 14] = true;
+		map[xOffset + 6][yOffset + 4] = true;
+		map[xOffset + 6][yOffset + 5] = true;
+		map[xOffset + 6][yOffset + 6] = true;
+		map[xOffset + 6][yOffset + 8] = true;
+		map[xOffset + 6][yOffset + 9] = true;
+		map[xOffset + 6][yOffset + 10] = true;
+		map[xOffset + 7][yOffset + 4] = true;
+		map[xOffset + 7][yOffset + 6] = true;
+		map[xOffset + 7][yOffset + 8] = true;
+		map[xOffset + 8][yOffset + 4] = true;
+		map[xOffset + 8][yOffset + 6] = true;
+		map[xOffset + 8][yOffset + 8] = true;
+		map[xOffset + 8][yOffset + 9] = true;
+		map[xOffset + 9][yOffset + 4] = true;
+		map[xOffset + 9][yOffset + 6] = true;
+		map[xOffset + 9][yOffset + 8] = true;
+		map[xOffset + 10][yOffset + 4] = true;
+		map[xOffset + 10][yOffset + 5] = true;
+		map[xOffset + 10][yOffset + 6] = true;
+		map[xOffset + 10][yOffset + 8] = true;
+		map[xOffset + 12][yOffset + 0] = true;
+		map[xOffset + 12][yOffset + 4] = true;
+		map[xOffset + 12][yOffset + 5] = true;
+		map[xOffset + 12][yOffset + 6] = true;
+		map[xOffset + 12][yOffset + 8] = true;
+		map[xOffset + 12][yOffset + 9] = true;
+		map[xOffset + 12][yOffset + 10] = true;
+		map[xOffset + 12][yOffset + 12] = true;
+		map[xOffset + 12][yOffset + 13] = true;
+		map[xOffset + 12][yOffset + 14] = true;
+		map[xOffset + 13][yOffset + 0] = true;
+		map[xOffset + 13][yOffset + 5] = true;
+		map[xOffset + 13][yOffset + 8] = true;
+		map[xOffset + 13][yOffset + 12] = true;
+		map[xOffset + 14][yOffset + 0] = true;
+		map[xOffset + 14][yOffset + 5] = true;
+		map[xOffset + 14][yOffset + 8] = true;
+		map[xOffset + 14][yOffset + 9] = true;
+		map[xOffset + 14][yOffset + 12] = true;
+		map[xOffset + 14][yOffset + 13] = true;
+		map[xOffset + 15][yOffset + 0] = true;
+		map[xOffset + 15][yOffset + 5] = true;
+		map[xOffset + 15][yOffset + 8] = true;
+		map[xOffset + 15][yOffset + 12] = true;
+		map[xOffset + 16][yOffset + 0] = true;
+		map[xOffset + 16][yOffset + 1] = true;
+		map[xOffset + 16][yOffset + 2] = true;
+		map[xOffset + 16][yOffset + 4] = true;
+		map[xOffset + 16][yOffset + 5] = true;
+		map[xOffset + 16][yOffset + 6] = true;
+		map[xOffset + 16][yOffset + 8] = true;
+		map[xOffset + 16][yOffset + 12] = true;
+		map[xOffset + 16][yOffset + 13] = true;
+		map[xOffset + 16][yOffset + 14] = true;
+		
+	}
+	
+	public String debugMap() {
+		String timmy = "";
+		
 		/**
 		 * Fills the map with (don't tell anybody) random values.
 		 */
-		/*for (int i = 0; i < RuleSet.HEIGHT; i++)
+		for (int i = 0; i < RuleSet.HEIGHT; i++)
 			for (int j = 0; j < RuleSet.WIDTH; j++)
-				if (new Random().nextInt(5) == 2)
-					map[i][j] = true;
-				else
-					map[i][j] = false;*/
+				if(map[i][j] == true)
+					timmy += "map[xOffset + " + i + "][yOffset + " + j + "] = true;\n";
+		
+		return timmy;
 	}
 
 	/**
@@ -105,8 +216,13 @@ public final class AndroidGameOfLifeView extends View {
 
 		if (event.getAction() == MotionEvent.ACTION_DOWN
 				| event.getAction() == MotionEvent.ACTION_MOVE) {
+			if(!map[(int) event.getY() / RuleSet.CELL_SIZE][(int) event.getX()
+					/ RuleSet.CELL_SIZE])
 			map[(int) event.getY() / RuleSet.CELL_SIZE][(int) event.getX()
 					/ RuleSet.CELL_SIZE] = true;
+			else
+				map[(int) event.getY() / RuleSet.CELL_SIZE][(int) event.getX()
+				                        					/ RuleSet.CELL_SIZE] = false;
 		}
 
 		invalidate();
@@ -165,7 +281,7 @@ public final class AndroidGameOfLifeView extends View {
 
 					/**
 					 * AFTER HOURS OF SERIOUS BRAIN MALFUNCTIONS,
-					 * I CAME UP WITH THIS ... ¯\_(ツ)_/¯ !!!
+					 * I CAME UP WITH THIS ... !!!
 					 * 00 01 02
 					 * 10 11 12		<- 11 is our Cell everything else it's neighbours
 					 * 20 21 22
