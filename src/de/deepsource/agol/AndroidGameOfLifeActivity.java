@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Display;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -58,7 +59,6 @@ public class AndroidGameOfLifeActivity extends Activity {
 			break;
 			
 		case R.id.item3:
-			//agolView.initMap();
 			final Intent intent = new Intent(
 					getApplicationContext(),
 					RuleEditorActivity.class);
