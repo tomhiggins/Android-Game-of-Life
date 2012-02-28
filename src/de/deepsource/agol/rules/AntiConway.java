@@ -2,13 +2,12 @@ package de.deepsource.agol.rules;
 
 import de.deepsource.agol.Agol;
 
-public class AntiConway extends RuleSet {
+public class AntiConway extends RuleSetUtil {
 
 	/**
 	 * Game of Life -- Anti Conway Rules
 	 */
 	public AntiConway() {
-		int[] gameRule = new int[9];
 		gameRule[0] = Agol.BIRTH_RULE;
 		gameRule[1] = Agol.BIRTH_RULE;
 		gameRule[2] = Agol.UNDEFINED;
@@ -18,8 +17,6 @@ public class AntiConway extends RuleSet {
 		gameRule[6] = Agol.BIRTH_RULE;
 		gameRule[7] = Agol.BIRTH_RULE;
 		gameRule[8] = Agol.BIRTH_RULE;
-
-		Agol.setGameRule(gameRule);
 	}
 
 }

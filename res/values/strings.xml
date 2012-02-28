@@ -18,5 +18,9 @@
     <string name="Neighbours">Neighbours:</string>
     <string name="ruleeditor">Rule Editor</string>
     <string name="s0">0</string>
+    <string name="undefined">undef.</string>
+    <string name="load">Load Ruleset</string>
+    <string name="rule_name">Enter a name for your rule</string>
+    <string name="save">Save Ruleset</string>
 
 </resources>

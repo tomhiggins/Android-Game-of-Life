@@ -5,16 +5,6 @@
     android:layout_height="fill_parent"
     android:stretchColumns="0" >
 
-    <TableRow android:layout_marginTop="10dip" >
-
-        <TextView
-            android:id="@+id/textViewNeighbourHeader"
-            android:layout_gravity="center"
-            android:text="@string/Neighbours"
-            android:textAppearance="?android:attr/textAppearanceMedium" />
-
-    </TableRow>
-
     <TableRow>
 
         <TextView
@@ -35,7 +25,13 @@
 
             <RadioButton
                 android:id="@+id/radioDeath0"
+                android:layout_marginRight="15dip"
                 android:text="@string/death" />
+
+            <RadioButton
+                android:id="@+id/radioundef0"
+                android:text="@string/undefined" />
+
         </RadioGroup>
         
     </TableRow>
@@ -60,7 +56,13 @@
 
             <RadioButton
                 android:id="@+id/radioDeath1"
+                android:layout_marginRight="15dip"
                 android:text="@string/death" />
+
+            <RadioButton
+                android:id="@+id/radioundef1"
+                android:text="@string/undefined" />
+
         </RadioGroup>
         
     </TableRow>
@@ -85,7 +87,13 @@
 
             <RadioButton
                 android:id="@+id/radioDeath2"
+                android:layout_marginRight="15dip"
                 android:text="@string/death" />
+
+            <RadioButton
+                android:id="@+id/radioundef2"
+                android:text="@string/undefined" />
+
         </RadioGroup>
         
     </TableRow>
@@ -110,7 +118,13 @@
 
             <RadioButton
                 android:id="@+id/radioDeath3"
+                android:layout_marginRight="15dip"
                 android:text="@string/death" />
+
+            <RadioButton
+                android:id="@+id/radioundef3"
+                android:text="@string/undefined" />
+
         </RadioGroup>
         
     </TableRow>
@@ -135,7 +149,13 @@
 
             <RadioButton
                 android:id="@+id/radioDeath4"
+                android:layout_marginRight="15dip"
                 android:text="@string/death" />
+
+            <RadioButton
+                android:id="@+id/radioundef4"
+                android:text="@string/undefined" />
+
         </RadioGroup>
         
     </TableRow>
@@ -160,7 +180,13 @@
 
             <RadioButton
                 android:id="@+id/radioDeath5"
+                android:layout_marginRight="15dip"
                 android:text="@string/death" />
+
+            <RadioButton
+                android:id="@+id/radioundef5"
+                android:text="@string/undefined" />
+
         </RadioGroup>
         
     </TableRow>
@@ -185,7 +211,13 @@
 
             <RadioButton
                 android:id="@+id/radioDeath6"
+                android:layout_marginRight="15dip"
                 android:text="@string/death" />
+
+            <RadioButton
+                android:id="@+id/radioundef6"
+                android:text="@string/undefined" />
+
         </RadioGroup>
         
     </TableRow>
@@ -210,7 +242,13 @@
 
             <RadioButton
                 android:id="@+id/radioDeath7"
+                android:layout_marginRight="15dip"
                 android:text="@string/death" />
+
+            <RadioButton
+                android:id="@+id/radioundef7"
+                android:text="@string/undefined" />
+
         </RadioGroup>
         
     </TableRow>
@@ -235,9 +273,28 @@
 
             <RadioButton
                 android:id="@+id/radioDeath8"
+                android:layout_marginRight="15dip"
                 android:text="@string/death" />
+
+            <RadioButton
+                android:id="@+id/radioButton8"
+                android:text="@string/undefined" />
+
         </RadioGroup>
         
+    </TableRow>
+
+    <TableRow >
+
+        <EditText
+            android:id="@+id/editTextName"
+            android:layout_span="3"
+            android:hint="@string/rule_name"
+            android:inputType="textCapCharacters" >
+
+            <requestFocus />
+        </EditText>
+
     </TableRow>
 
 </TableLayout>

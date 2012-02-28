@@ -1,5 +1,6 @@
 package de.deepsource.agol;
 
+import de.deepsource.agol.database.RuleSet;
 import android.app.Application;
 
 /**
@@ -23,7 +24,7 @@ public class Agol extends Application {
 	 */
 	public static final int DEATH_RULE = 2;
 	
-	private static int[] gameRule = new int[9];
+	private static RuleSet ruleSet;
 	
 	/**
 	 * The width of the device.
@@ -34,14 +35,6 @@ public class Agol extends Application {
 	 * The height of the device.
 	 */
 	private static int viewportHeight;
-	
-	public static int[] getGameRule() {
-		return gameRule;
-	}
-
-	public static void setGameRule(int[] newGameRule) {
-		gameRule = newGameRule;
-	}
 
 	/**
 	 * Getter for {@link Agol#viewportWidth}.
@@ -77,5 +70,13 @@ public class Agol extends Application {
 	 */
 	public static void setViewportHeight(final int newViewportHeight) {
 		viewportHeight = newViewportHeight;
+	}
+
+	public static RuleSet getRuleSet() {
+		return ruleSet;
+	}
+
+	public static void setRuleSet(RuleSet ruleSet) {
+		Agol.ruleSet = ruleSet;
 	}
 }
