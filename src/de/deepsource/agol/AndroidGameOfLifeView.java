@@ -20,6 +20,9 @@ public final class AndroidGameOfLifeView extends View {
 
 	private Paint paint = new Paint();
 	private Paint white = new Paint();
+
+	private int[][] red, green, blue;
+
 	private boolean[][] map;
 
 	/**
@@ -37,21 +40,77 @@ public final class AndroidGameOfLifeView extends View {
 		super(context);
 		init();
 	}
-	
+
 	public AndroidGameOfLifeView(Context context, AttributeSet attrs) {
 		super(context, attrs);
 		init();
 	}
-	
-	public AndroidGameOfLifeView(Context context, AttributeSet attrs, int defSytle) {
+
+	public AndroidGameOfLifeView(Context context, AttributeSet attrs,
+			int defSytle) {
 		super(context, attrs, defSytle);
 		init();
 	}
-	
+
 	private void init() {
 		paint.setColor(Color.GREEN);
 		white.setColor(Color.BLACK);
+		initColorArrays();
 		initMap();
+	}
+
+	/**
+	 * This method will callculate different colour maps.
+	 */
+	private void initColorArrays() {
+		red = new int[RuleSet.HEIGHT][RuleSet.WIDTH];
+		green = new int[RuleSet.HEIGHT][RuleSet.WIDTH];
+		blue = new int[RuleSet.HEIGHT][RuleSet.WIDTH];
+
+		/**
+		 * (1) (2) 233,44,42 84,91,163
+		 * 
+		 * (3) (4) 7,153,88 253,197,24
+		 */
+
+		// colour 1
+		int red1 = 255;
+		int green1 = 0;
+		int blue1 = 0;
+
+		// colour 2
+		int red4 = 0;
+		int green4 = 255;
+		int blue4 = 0;
+
+		// colour 3
+		int red3 = 0;
+		int green3 = 0;
+		int blue3 = 255;
+
+		// colour 4
+		int red2 = 255;
+		int green2 = 255;
+		int blue2 = 0;
+
+		int diff_red2;
+		int diff_green2;
+		int diff_blue2;
+
+		for (int h = 0; h < RuleSet.HEIGHT; h++)
+			for (int w = 0; w < RuleSet.WIDTH; w++) {
+				red[h][w] = red1 + ((red2 - red1) * h / RuleSet.HEIGHT);
+				diff_red2 = red3 + ((red4 - red3) * h / RuleSet.HEIGHT);
+				red[h][w] += ((diff_red2 - red[h][w]) * w / RuleSet.WIDTH);
+
+				blue[h][w] = blue1 + ((blue2 - blue1) * h / RuleSet.HEIGHT);
+				diff_blue2 = blue3 + ((blue4 - blue3) * h / RuleSet.HEIGHT);
+				blue[h][w] += ((diff_blue2 - blue[h][w]) * w / RuleSet.WIDTH);
+
+				green[h][w] = green1 + ((green2 - green1) * h / RuleSet.HEIGHT);
+				diff_green2 = green3 + ((green4 - green3) * h / RuleSet.HEIGHT);
+				green[h][w] += ((diff_green2 - green[h][w]) * w / RuleSet.WIDTH);
+			}
 	}
 
 	/**
@@ -63,11 +122,13 @@ public final class AndroidGameOfLifeView extends View {
 
 		for (int h = 0; h < RuleSet.HEIGHT; h++)
 			for (int w = 0; w < RuleSet.WIDTH; w++)
-				if (map[h][w])
+				if (map[h][w]) {
+					paint.setARGB(255, red[h][w], green[h][w], blue[h][w]);
 					canvas.drawRect(w * RuleSet.CELL_SIZE, h
 							* RuleSet.CELL_SIZE, (w * RuleSet.CELL_SIZE)
 							+ RuleSet.CELL_SIZE, (h * RuleSet.CELL_SIZE)
 							+ RuleSet.CELL_SIZE, paint);
+				}
 	}
 
 	/**
@@ -86,13 +147,14 @@ public final class AndroidGameOfLifeView extends View {
 	 */
 	public void initMap() {
 		map = new boolean[RuleSet.HEIGHT][RuleSet.WIDTH];
-		
+
 		int xOffset = RuleSet.HEIGHT / 2 - 10;
 		int yOffset = RuleSet.WIDTH / 2 - 7;
-		
+
 		/**
 		 * Printing Logo screen (16 * 14 cells)
 		 */
+		
 		map[xOffset + 0][yOffset + 0] = true;
 		map[xOffset + 0][yOffset + 1] = true;
 		map[xOffset + 0][yOffset + 2] = true;
@@ -192,26 +254,52 @@ public final class AndroidGameOfLifeView extends View {
 		map[xOffset + 16][yOffset + 13] = true;
 		map[xOffset + 16][yOffset + 14] = true;
 		
+
+	}
+
+	/**
+	 * Common methode for checking prime numbers.
+	 * 
+	 * @param number
+	 * @return true if number is prime
+	 */
+	private static boolean isPrime(int n) {
+		boolean prime = true;
+		for (int i = 3; i <= Math.sqrt(n); i += 2)
+			if (n % i == 0) {
+				prime = false;
+				break;
+			}
+		if ((n % 2 != 0 && prime && n > 2) || n == 2) {
+			return true;
+		} else {
+			return false;
+		}
 	}
 
 	/**
 	 * Super techy android stuff!
 	 */
-	public boolean onTouchEvent(MotionEvent event) {
+	@Override
+	public boolean dispatchTouchEvent(MotionEvent event) {
 
-		if (event.getAction() == MotionEvent.ACTION_DOWN
-				| event.getAction() == MotionEvent.ACTION_MOVE) {
-			if(!map[(int) event.getY() / RuleSet.CELL_SIZE][(int) event.getX()
-					/ RuleSet.CELL_SIZE])
-			map[(int) event.getY() / RuleSet.CELL_SIZE][(int) event.getX()
-					/ RuleSet.CELL_SIZE] = true;
+		int tempY = (int) event.getY() / RuleSet.CELL_SIZE;
+		int tempX = (int) event.getX() / RuleSet.CELL_SIZE;
+
+		switch (event.getAction()) {
+		case MotionEvent.ACTION_DOWN:
+			if (!map[tempY][tempX])
+				map[tempY][tempX] = true;
 			else
-				map[(int) event.getY() / RuleSet.CELL_SIZE][(int) event.getX()
-				                        					/ RuleSet.CELL_SIZE] = false;
+				map[tempY][tempX] = false;
+			break;
+		case MotionEvent.ACTION_MOVE:
+			map[tempY][tempX] = true;
+			break;
 		}
 
 		invalidate();
-		return false;
+		return true;
 	}
 
 	/**
@@ -265,11 +353,9 @@ public final class AndroidGameOfLifeView extends View {
 					boolean[][] nextGen = new boolean[RuleSet.HEIGHT][RuleSet.WIDTH];
 
 					/*
-					 * AFTER HOURS OF SERIOUS BRAIN MALFUNCTIONS,
-					 * I CAME UP WITH THIS ... !!!
-					 * 00 01 02
-					 * 10 11 12		<- 11 is our Cell everything else it's neighbours
-					 * 20 21 22
+					 * AFTER HOURS OF SERIOUS BRAIN MALFUNCTIONS, I CAME UP WITH
+					 * THIS ... !!! 00 01 02 10 11 12 <- 11 is our Cell
+					 * everything else it's neighbours 20 21 22
 					 */
 					for (int h = 0; h < RuleSet.HEIGHT; h++) {
 						for (int w = 0; w < RuleSet.WIDTH; w++) {
@@ -337,11 +423,14 @@ public final class AndroidGameOfLifeView extends View {
 							// 22
 							if (h < RuleSet.HEIGHT - 1 && w < RuleSet.WIDTH - 1)
 								region[2][2] = map[h + 1][w + 1];
-							else if (h >= RuleSet.HEIGHT - 1 && w < RuleSet.WIDTH - 1)
+							else if (h >= RuleSet.HEIGHT - 1
+									&& w < RuleSet.WIDTH - 1)
 								region[2][2] = map[0][w + 1];
-							else if (h < RuleSet.HEIGHT - 1 && w >= RuleSet.WIDTH - 1)
+							else if (h < RuleSet.HEIGHT - 1
+									&& w >= RuleSet.WIDTH - 1)
 								region[2][2] = map[h + 1][0];
-							else if (h >= RuleSet.HEIGHT - 1 && w >= RuleSet.WIDTH - 1)
+							else if (h >= RuleSet.HEIGHT - 1
+									&& w >= RuleSet.WIDTH - 1)
 								region[2][2] = map[0][0];
 
 							// ----------------------------
