@@ -5,6 +5,7 @@ import java.util.List;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.Menu;
@@ -99,11 +100,63 @@ public class RuleEditorActivity extends Activity {
 		case R.id.save:
 			saveRuleSet();
 			break;
+		
+		case R.id.delete:
+			deleteRuleSet();
+			break;
 		}
 		
 		return true;
 	}
 	
+	private void deleteRuleSet() {
+		datasource.open();
+
+		final List<RuleSet> values = datasource.getAllRulesets();
+		int size = values.size();
+		final CharSequence[] items = new CharSequence[size];
+
+		for (int i = 0; i < size; i++) {
+			items[i] = values.get(i).getName();
+		}
+		
+		final Context context = this;
+
+		AlertDialog.Builder builder = new AlertDialog.Builder(context);
+
+		builder.setTitle(getString(R.string.pick_ruleset));
+		builder.setItems(items, new DialogInterface.OnClickListener() {
+
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				AlertDialog.Builder builder2 = new AlertDialog.Builder(context);
+				builder2.setMessage(getString(R.string.deleted_ruleset_warning) + " " + items[which] + "?")
+					.setCancelable(true)
+					.setPositiveButton(getString(R.string.yes), new DialogInterface.OnClickListener() {
+						
+						@Override
+						public void onClick(DialogInterface dialog, int which) {
+							datasource.deleteRuleset(values.get(which));
+							Toast.makeText(getApplicationContext(), getString(R.string.deleted_ruleset) + items[which],
+									Toast.LENGTH_SHORT).show();
+						}
+					})
+					.setNegativeButton(getString(R.string.no), new DialogInterface.OnClickListener() {
+						
+						@Override
+						public void onClick(DialogInterface dialog, int which) {
+							dialog.cancel();
+						}
+					});
+				AlertDialog alert2 = builder2.create();
+				alert2.show();
+			}
+		});
+
+		AlertDialog alert = builder.create();
+		alert.show();
+	}
+
 	private void saveRuleSet() {
 		TextView name = (TextView) findViewById(R.id.editTextName);
 		if (name.getText().length() > 0) {
@@ -115,10 +168,9 @@ public class RuleEditorActivity extends Activity {
 			datasource.createRuleset(ruleSet);
 		} else {
 			AlertDialog.Builder builder = new AlertDialog.Builder(this);
-			// TODO: string resource
-			builder.setMessage("You need to enter a name for your ruleset before you can save!")
+			builder.setMessage(getString(R.string.save_warning))
 				.setCancelable(true)
-				.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+				.setPositiveButton(getString(R.string.ok), new DialogInterface.OnClickListener() {
 					
 					@Override
 					public void onClick(DialogInterface dialog, int which) {
@@ -143,8 +195,7 @@ public class RuleEditorActivity extends Activity {
 		
 		AlertDialog.Builder builder = new AlertDialog.Builder(this);
 		
-		// TODO: add a string resource
-		builder.setTitle("Pick a RuleSet");
+		builder.setTitle(getString(R.string.pick_ruleset));
 		builder.setItems(items, new DialogInterface.OnClickListener() {
 			
 			@Override

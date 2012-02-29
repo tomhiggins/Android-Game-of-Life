@@ -2,11 +2,15 @@ package de.deepsource.agol.database;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import de.deepsource.agol.Agol;
+
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
 
 public class RuleSetDataSource {
 	private SQLiteDatabase database;
@@ -44,6 +48,10 @@ public class RuleSetDataSource {
 		values.put(MySQLiteHelper.COLUMN_N7, rules[7]);
 		values.put(MySQLiteHelper.COLUMN_N8, rules[8]);
 		long id = database.insert(MySQLiteHelper.TABLE_RULES, null, values);
+		
+		if (id == -1) {
+			Log.w(Agol.APP_NAME, "Could not insert core data into database!");
+		}
 	}
 	
 	public List<RuleSet> getAllRulesets() {
@@ -61,6 +69,11 @@ public class RuleSetDataSource {
 		
 		cursor.close();
 		return ruleSets;
+	}
+	
+	public void deleteRuleset(RuleSet ruleSet) {
+		long id = ruleSet.getId();
+		database.delete(MySQLiteHelper.TABLE_RULES, MySQLiteHelper.COLUMN_ID + " = " + id, null);
 	}
 	
 	private RuleSet cursorToRuleSet(Cursor cursor) {

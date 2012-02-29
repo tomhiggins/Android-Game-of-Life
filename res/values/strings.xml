@@ -22,5 +22,14 @@
     <string name="load">Load Ruleset</string>
     <string name="rule_name">Enter a name for your rule</string>
     <string name="save">Save Ruleset</string>
+    <string name="save_warning">You need to enter a name for your ruleset before you can save!</string>
+    <string name="delete">Delete Ruleset</string>
+    <string name="deleted_ruleset">You have successfully deleted the ruleset </string>
+    <string name="deleted_ruleset_warning">Do you really want to delete the ruleset</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+    <string name="ok">OK</string>
+    <string name="pick_ruleset">Pick a ruleset</string>
+    
 
 </resources>
