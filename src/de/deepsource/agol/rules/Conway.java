@@ -5,13 +5,12 @@ import de.deepsource.agol.Agol;
 /**
  * @author Sebastian Ullrich
  */
-public class Conway extends RuleSet {
+public class Conway extends RuleSetUtil {
 
 	/**
 	 * Game of Life -- Conway Rules
 	 */
 	public Conway() {
-		int[] gameRule = new int[9];
 		gameRule[0] = Agol.DEATH_RULE;
 		gameRule[1] = Agol.DEATH_RULE;
 		gameRule[2] = Agol.UNDEFINED;
@@ -21,8 +20,6 @@ public class Conway extends RuleSet {
 		gameRule[6] = Agol.DEATH_RULE;
 		gameRule[7] = Agol.DEATH_RULE;
 		gameRule[8] = Agol.DEATH_RULE;
-
-		Agol.setGameRule(gameRule);
 	}
 
 }

@@ -20,6 +20,7 @@ public class AndroidGameOfLifeActivity extends Activity {
 
 	private AndroidGameOfLifeView agolView;
 
+	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
@@ -37,6 +38,7 @@ public class AndroidGameOfLifeActivity extends Activity {
 //		setContentView(agolView);
 	}
 
+	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		MenuInflater inflater = getMenuInflater();
 		inflater.inflate(R.menu.mainmenu, menu);
