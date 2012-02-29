@@ -95,8 +95,7 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
 		long id = database.insert(MySQLiteHelper.TABLE_RULES, null, values);
 		
 		if (id == -1) {
-			// TODO: add global
-			Log.e("Agol", "Could not insert core data into database!");
+			Log.w(Agol.APP_NAME, "Could not insert core data into database!");
 		}
 	}
 
