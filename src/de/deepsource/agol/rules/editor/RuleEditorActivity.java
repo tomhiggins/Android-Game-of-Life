@@ -9,7 +9,6 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -73,19 +72,14 @@ public class RuleEditorActivity extends Activity {
 					}
 				});
 			}
-			
-//			
-//			if (gameRule[i] == Agol.BIRTH_RULE) {
-//				birth.toggle();
-//			} else {
-//				death.toggle();
-//			}
 		}
+		
+		updateRadioButtons();
 	}
 	
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
-		MenuInflater inflater = getMenuInflater();
+		//MenuInflater inflater = getMenuInflater();
 		//inflater.inflate(R.menu.ruleeditormenu, menu);
 		return true;
 	}
@@ -109,6 +103,7 @@ public class RuleEditorActivity extends Activity {
 		return true;
 	}
 	
+	@SuppressWarnings("unused")
 	private void deleteRuleSet() {
 		datasource.open();
 
@@ -157,6 +152,7 @@ public class RuleEditorActivity extends Activity {
 		alert.show();
 	}
 
+	@SuppressWarnings("unused")
 	private void saveRuleSet() {
 		TextView name = (TextView) findViewById(R.id.editTextName);
 		if (name.getText().length() > 0) {
@@ -182,6 +178,7 @@ public class RuleEditorActivity extends Activity {
 		}
 	}
 	
+	@SuppressWarnings("unused")
 	private void loadRuleSets() {
 		datasource.open();
 		
@@ -200,7 +197,7 @@ public class RuleEditorActivity extends Activity {
 			
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
-				Agol.setRuleSet(values.get(which));
+				Agol.setRuleSet(values.get(which).getRuleSet());
 				updateRadioButtons();
 				Toast.makeText(getApplicationContext(), items[which], Toast.LENGTH_SHORT).show();
 			}
@@ -211,7 +208,7 @@ public class RuleEditorActivity extends Activity {
 	}
 	
 	private void updateRadioButtons() {
-		gameRule = Agol.getRuleSet().getRuleSet();
+		gameRule = Agol.getRuleSet();
 		RadioButton temp;
 		
 		for (int i = 0; i < buttons.size(); i++) {
@@ -231,6 +228,7 @@ public class RuleEditorActivity extends Activity {
 	@Override
 	protected void onPause() {
 		datasource.close();
+		Agol.setRuleSet(gameRule);
 		super.onPause();
 	}
 	

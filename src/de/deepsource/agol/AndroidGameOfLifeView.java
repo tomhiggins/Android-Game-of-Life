@@ -57,6 +57,19 @@ public final class AndroidGameOfLifeView extends View {
 		white.setColor(Color.BLACK);
 		initColorArrays();
 		initMap();
+		
+		// set Conway as initial ruleset
+		int[] gameRule = new int[9];
+		gameRule[0] = Agol.DEATH_RULE;
+		gameRule[1] = Agol.DEATH_RULE;
+		gameRule[2] = Agol.UNDEFINED;
+		gameRule[3] = Agol.BIRTH_RULE;
+		gameRule[4] = Agol.DEATH_RULE;
+		gameRule[5] = Agol.DEATH_RULE;
+		gameRule[6] = Agol.DEATH_RULE;
+		gameRule[7] = Agol.DEATH_RULE;
+		gameRule[8] = Agol.DEATH_RULE;
+		Agol.setRuleSet(gameRule);
 	}
 
 	/**
@@ -149,7 +162,6 @@ public final class AndroidGameOfLifeView extends View {
 		/**
 		 * Printing Logo screen (16 * 14 cells)
 		 */
-		
 		map[xOffset + 0][yOffset + 0] = true;
 		map[xOffset + 0][yOffset + 1] = true;
 		map[xOffset + 0][yOffset + 2] = true;
@@ -305,7 +317,7 @@ public final class AndroidGameOfLifeView extends View {
 	 * @param rule
 	 *            Game of Life RuleSet
 	 */
-	public void runLoop(final RuleSetUtil rule) {
+	public void runLoop() {
 		new Thread(new Runnable() {
 
 			@Override
@@ -328,8 +340,11 @@ public final class AndroidGameOfLifeView extends View {
 
 					/*
 					 * AFTER HOURS OF SERIOUS BRAIN MALFUNCTIONS, I CAME UP WITH
-					 * THIS ... !!! 00 01 02 10 11 12 <- 11 is our Cell
-					 * everything else it's neighbours 20 21 22
+					 * THIS ... !!! 
+					 * 00 01 02 
+					 * 10 11 12 <- 11 is our Cell
+					 * 20 21 22
+					 * everything else it's neighbours 
 					 */
 					for (int h = 0; h < RuleSetUtil.HEIGHT; h++) {
 						for (int w = 0; w < RuleSetUtil.WIDTH; w++) {
@@ -405,7 +420,7 @@ public final class AndroidGameOfLifeView extends View {
 								region[2][2] = map[0][0];
 
 							// ----------------------------
-							nextGen[h][w] = rule.apply(region);
+							nextGen[h][w] = RuleSetUtil.apply(region);
 						}
 					}
 					map = nextGen;
