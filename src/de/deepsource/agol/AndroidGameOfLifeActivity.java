@@ -33,9 +33,9 @@ public class AndroidGameOfLifeActivity extends Activity {
 		
 		agolView = (AndroidGameOfLifeView) findViewById(R.id.androidGameOfLifeView1);
 
-//		agolView = new AndroidGameOfLifeView(this);
+		agolView = new AndroidGameOfLifeView(this);
 		agolView.setBackgroundColor(Color.BLACK);
-//		setContentView(agolView);
+		setContentView(agolView);
 	}
 
 	@Override

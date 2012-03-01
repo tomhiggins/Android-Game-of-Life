@@ -67,21 +67,15 @@ public final class AndroidGameOfLifeView extends View {
 		green = new int[RuleSetUtil.HEIGHT][RuleSetUtil.WIDTH];
 		blue = new int[RuleSetUtil.HEIGHT][RuleSetUtil.WIDTH];
 
-		/**
-		 * (1) (2) 233,44,42 84,91,163
-		 * 
-		 * (3) (4) 7,153,88 253,197,24
-		 */
-
 		// colour 1
 		int red1 = 255;
 		int green1 = 0;
 		int blue1 = 0;
 
 		// colour 2
-		int red4 = 0;
-		int green4 = 255;
-		int blue4 = 0;
+		int red2 = 255;
+		int green2 = 255;
+		int blue2 = 0;
 
 		// colour 3
 		int red3 = 0;
@@ -89,9 +83,9 @@ public final class AndroidGameOfLifeView extends View {
 		int blue3 = 255;
 
 		// colour 4
-		int red2 = 255;
-		int green2 = 255;
-		int blue2 = 0;
+		int red4 = 0;
+		int green4 = 255;
+		int blue4 = 0;
 
 		int diff_red2;
 		int diff_green2;
@@ -254,26 +248,6 @@ public final class AndroidGameOfLifeView extends View {
 		map[xOffset + 16][yOffset + 12] = true;
 		map[xOffset + 16][yOffset + 13] = true;
 		map[xOffset + 16][yOffset + 14] = true;
-	}
-
-	/**
-	 * Common methode for checking prime numbers.
-	 * 
-	 * @param number
-	 * @return true if number is prime
-	 */
-	private static boolean isPrime(int n) {
-		boolean prime = true;
-		for (int i = 3; i <= Math.sqrt(n); i += 2)
-			if (n % i == 0) {
-				prime = false;
-				break;
-			}
-		if ((n % 2 != 0 && prime && n > 2) || n == 2) {
-			return true;
-		} else {
-			return false;
-		}
 	}
 
 	/**

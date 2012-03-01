@@ -86,14 +86,14 @@ public class RuleEditorActivity extends Activity {
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		MenuInflater inflater = getMenuInflater();
-		inflater.inflate(R.menu.ruleeditormenu, menu);
+		//inflater.inflate(R.menu.ruleeditormenu, menu);
 		return true;
 	}
 	
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch (item.getItemId()) {
-		case R.id.load:
+		/*case R.id.load:
 			loadRuleSets();
 			break;
 			
@@ -103,7 +103,7 @@ public class RuleEditorActivity extends Activity {
 		
 		case R.id.delete:
 			deleteRuleSet();
-			break;
+			break;*/
 		}
 		
 		return true;
