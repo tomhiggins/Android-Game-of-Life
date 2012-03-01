@@ -52,6 +52,19 @@ public final class AndroidGameOfLifeView extends View {
 		paint.setColor(Color.GREEN);
 		white.setColor(Color.BLACK);
 		initMap();
+		
+		// set Conway as initial ruleset
+		int[] gameRule = new int[9];
+		gameRule[0] = Agol.DEATH_RULE;
+		gameRule[1] = Agol.DEATH_RULE;
+		gameRule[2] = Agol.UNDEFINED;
+		gameRule[3] = Agol.BIRTH_RULE;
+		gameRule[4] = Agol.DEATH_RULE;
+		gameRule[5] = Agol.DEATH_RULE;
+		gameRule[6] = Agol.DEATH_RULE;
+		gameRule[7] = Agol.DEATH_RULE;
+		gameRule[8] = Agol.DEATH_RULE;
+		Agol.setRuleSet(gameRule);
 	}
 
 	/**
@@ -191,7 +204,6 @@ public final class AndroidGameOfLifeView extends View {
 		map[xOffset + 16][yOffset + 12] = true;
 		map[xOffset + 16][yOffset + 13] = true;
 		map[xOffset + 16][yOffset + 14] = true;
-		
 	}
 
 	/**
@@ -244,7 +256,7 @@ public final class AndroidGameOfLifeView extends View {
 	 * @param rule
 	 *            Game of Life RuleSet
 	 */
-	public void runLoop(final RuleSetUtil rule) {
+	public void runLoop() {
 		new Thread(new Runnable() {
 
 			@Override
@@ -346,7 +358,7 @@ public final class AndroidGameOfLifeView extends View {
 								region[2][2] = map[0][0];
 
 							// ----------------------------
-							nextGen[h][w] = rule.apply(region);
+							nextGen[h][w] = RuleSetUtil.apply(region);
 						}
 					}
 					map = nextGen;

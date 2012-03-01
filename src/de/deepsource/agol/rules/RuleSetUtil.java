@@ -4,6 +4,7 @@ import de.deepsource.agol.Agol;
 
 /**
  * @author Sebastian Ullrich
+ * TODO: do we still need this class?
  */
 public abstract class RuleSetUtil {
 	/**
@@ -13,21 +14,21 @@ public abstract class RuleSetUtil {
 	public static final int HEIGHT = Agol.getViewportHeight() / CELL_SIZE;
 	public static final int WIDTH = Agol.getViewportWidth() / CELL_SIZE;
 	
-	protected int[] gameRule = new int[9];
+//	protected static int[] gameRule = Agol.getRuleSet();
 
 	public RuleSetUtil() {
 		/**
 		 * Nihilism Rule...
 		 */
-		gameRule[0] = Agol.UNDEFINED;
-		gameRule[1] = Agol.UNDEFINED;
-		gameRule[2] = Agol.UNDEFINED;
-		gameRule[3] = Agol.UNDEFINED;
-		gameRule[4] = Agol.UNDEFINED;
-		gameRule[5] = Agol.UNDEFINED;
-		gameRule[6] = Agol.UNDEFINED;
-		gameRule[7] = Agol.UNDEFINED;
-		gameRule[8] = Agol.UNDEFINED;
+//		gameRule[0] = Agol.UNDEFINED;
+//		gameRule[1] = Agol.UNDEFINED;
+//		gameRule[2] = Agol.UNDEFINED;
+//		gameRule[3] = Agol.UNDEFINED;
+//		gameRule[4] = Agol.UNDEFINED;
+//		gameRule[5] = Agol.UNDEFINED;
+//		gameRule[6] = Agol.UNDEFINED;
+//		gameRule[7] = Agol.UNDEFINED;
+//		gameRule[8] = Agol.UNDEFINED;
 	}
 	
 	public RuleSetUtil(int[] rule) {
@@ -41,7 +42,9 @@ public abstract class RuleSetUtil {
 	 *            neigbourhood
 	 * @return state of cell in next cycle
 	 */
-	public boolean apply(boolean[][] region) {
+	public static boolean apply(boolean[][] region) {
+		int[] gameRule = Agol.getRuleSet();
+		
 		/**
 		 * initial status of cell.
 		 */
@@ -70,7 +73,7 @@ public abstract class RuleSetUtil {
 			return true;
 
 		/**
-		 * destiny is undefiened.
+		 * destiny is undefined.
 		 */
 		return status;
 	}

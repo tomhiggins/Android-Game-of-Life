@@ -4,12 +4,10 @@ import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Display;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import de.deepsource.agol.rules.Conway;
 import de.deepsource.agol.rules.editor.RuleEditorActivity;
 
 /**
@@ -33,10 +31,7 @@ public class AndroidGameOfLifeActivity extends Activity {
 		setContentView(R.layout.main);
 		
 		agolView = (AndroidGameOfLifeView) findViewById(R.id.androidGameOfLifeView1);
-
-//		agolView = new AndroidGameOfLifeView(this);
 		agolView.setBackgroundColor(Color.BLACK);
-//		setContentView(agolView);
 	}
 
 	@Override
@@ -51,7 +46,7 @@ public class AndroidGameOfLifeActivity extends Activity {
 		switch (item.getItemId()) {
 		case R.id.item1:
 			agolView.lock();
-			agolView.runLoop(new Conway());
+			agolView.runLoop();
 			break;
 
 		case R.id.item2:

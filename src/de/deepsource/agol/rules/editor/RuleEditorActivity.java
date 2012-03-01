@@ -73,14 +73,9 @@ public class RuleEditorActivity extends Activity {
 					}
 				});
 			}
-			
-//			
-//			if (gameRule[i] == Agol.BIRTH_RULE) {
-//				birth.toggle();
-//			} else {
-//				death.toggle();
-//			}
 		}
+		
+		updateRadioButtons();
 	}
 	
 	@Override
@@ -200,7 +195,7 @@ public class RuleEditorActivity extends Activity {
 			
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
-				Agol.setRuleSet(values.get(which));
+				Agol.setRuleSet(values.get(which).getRuleSet());
 				updateRadioButtons();
 				Toast.makeText(getApplicationContext(), items[which], Toast.LENGTH_SHORT).show();
 			}
@@ -211,7 +206,7 @@ public class RuleEditorActivity extends Activity {
 	}
 	
 	private void updateRadioButtons() {
-		gameRule = Agol.getRuleSet().getRuleSet();
+		gameRule = Agol.getRuleSet();
 		RadioButton temp;
 		
 		for (int i = 0; i < buttons.size(); i++) {
@@ -231,6 +226,7 @@ public class RuleEditorActivity extends Activity {
 	@Override
 	protected void onPause() {
 		datasource.close();
+		Agol.setRuleSet(gameRule);
 		super.onPause();
 	}
 	
