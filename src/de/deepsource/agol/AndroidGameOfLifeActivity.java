@@ -8,7 +8,7 @@ import android.view.Display;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import de.deepsource.agol.rules.editor.RuleEditorActivity;
+import de.deepsource.agol.rules.RuleEditorActivity;
 
 /**
  * @author Sebastian Ullrich
