@@ -9,6 +9,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -79,15 +80,15 @@ public class RuleEditorActivity extends Activity {
 	
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
-		//MenuInflater inflater = getMenuInflater();
-		//inflater.inflate(R.menu.ruleeditormenu, menu);
+		MenuInflater inflater = getMenuInflater();
+		inflater.inflate(R.menu.ruleeditormenu, menu);
 		return true;
 	}
 	
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch (item.getItemId()) {
-		/*case R.id.load:
+		case R.id.load:
 			loadRuleSets();
 			break;
 			
@@ -97,13 +98,12 @@ public class RuleEditorActivity extends Activity {
 		
 		case R.id.delete:
 			deleteRuleSet();
-			break;*/
+			break;
 		}
 		
 		return true;
 	}
 	
-	@SuppressWarnings("unused")
 	private void deleteRuleSet() {
 		datasource.open();
 
@@ -152,7 +152,6 @@ public class RuleEditorActivity extends Activity {
 		alert.show();
 	}
 
-	@SuppressWarnings("unused")
 	private void saveRuleSet() {
 		TextView name = (TextView) findViewById(R.id.editTextName);
 		if (name.getText().length() > 0) {
@@ -178,7 +177,6 @@ public class RuleEditorActivity extends Activity {
 		}
 	}
 	
-	@SuppressWarnings("unused")
 	private void loadRuleSets() {
 		datasource.open();
 		

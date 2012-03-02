@@ -1,9 +1,7 @@
 package de.deepsource.agol;
 
-import de.deepsource.agol.rules.RuleSetUtil;
 import android.content.Context;
 import android.graphics.Canvas;
-import android.graphics.Color;
 import android.graphics.Paint;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
@@ -17,9 +15,20 @@ import android.view.View;
  *       Model-View-Controller madness.
  */
 public final class AndroidGameOfLifeView extends View {
-
-	private Paint paint = new Paint();
-	private Paint white = new Paint();
+	/**
+	 * Map and cell size.
+	 */
+	private static final int CELL_SIZE = 10;
+	private static final int HEIGHT = Agol.getViewportHeight() / CELL_SIZE;
+	private static final int WIDTH = Agol.getViewportWidth() / CELL_SIZE;
+	
+	/**
+	 * RuleSet
+	 */
+	private static int[] gameRule;
+	
+	private Paint foreground = new Paint();
+	private Paint background = new Paint();
 
 	private int[][] red, green, blue;
 
@@ -53,32 +62,20 @@ public final class AndroidGameOfLifeView extends View {
 	}
 
 	private void init() {
-		paint.setColor(Color.GREEN);
-		white.setColor(Color.BLACK);
+		//foreground.setColor(Color.GREEN);
+		background.setARGB(255, 45, 45, 45);
 		initColorArrays();
 		initMap();
-		
-		// set Conway as initial ruleset
-		int[] gameRule = new int[9];
-		gameRule[0] = Agol.DEATH_RULE;
-		gameRule[1] = Agol.DEATH_RULE;
-		gameRule[2] = Agol.UNDEFINED;
-		gameRule[3] = Agol.BIRTH_RULE;
-		gameRule[4] = Agol.DEATH_RULE;
-		gameRule[5] = Agol.DEATH_RULE;
-		gameRule[6] = Agol.DEATH_RULE;
-		gameRule[7] = Agol.DEATH_RULE;
-		gameRule[8] = Agol.DEATH_RULE;
-		Agol.setRuleSet(gameRule);
+		initGameRules();
 	}
 
 	/**
 	 * This method will callculate different colour maps.
 	 */
 	private void initColorArrays() {
-		red = new int[RuleSetUtil.HEIGHT][RuleSetUtil.WIDTH];
-		green = new int[RuleSetUtil.HEIGHT][RuleSetUtil.WIDTH];
-		blue = new int[RuleSetUtil.HEIGHT][RuleSetUtil.WIDTH];
+		red = new int[HEIGHT][WIDTH];
+		green = new int[HEIGHT][WIDTH];
+		blue = new int[HEIGHT][WIDTH];
 
 		// colour 1
 		int red1 = 255;
@@ -103,20 +100,20 @@ public final class AndroidGameOfLifeView extends View {
 		int diff_red2;
 		int diff_green2;
 		int diff_blue2;
+		
+		for (int h = 0; h < HEIGHT; h++)
+			for (int w = 0; w < WIDTH; w++) {
+				red[h][w] = red1 + ((red2 - red1) * h / HEIGHT);
+				diff_red2 = red3 + ((red4 - red3) * h / HEIGHT);
+				red[h][w] += ((diff_red2 - red[h][w]) * w / WIDTH);
 
-		for (int h = 0; h < RuleSetUtil	.HEIGHT; h++)
-			for (int w = 0; w < RuleSetUtil.WIDTH; w++) {
-				red[h][w] = red1 + ((red2 - red1) * h / RuleSetUtil.HEIGHT);
-				diff_red2 = red3 + ((red4 - red3) * h / RuleSetUtil.HEIGHT);
-				red[h][w] += ((diff_red2 - red[h][w]) * w / RuleSetUtil.WIDTH);
+				blue[h][w] = blue1 + ((blue2 - blue1) * h / HEIGHT);
+				diff_blue2 = blue3 + ((blue4 - blue3) * h / HEIGHT);
+				blue[h][w] += ((diff_blue2 - blue[h][w]) * w / WIDTH);
 
-				blue[h][w] = blue1 + ((blue2 - blue1) * h / RuleSetUtil.HEIGHT);
-				diff_blue2 = blue3 + ((blue4 - blue3) * h / RuleSetUtil.HEIGHT);
-				blue[h][w] += ((diff_blue2 - blue[h][w]) * w / RuleSetUtil.WIDTH);
-
-				green[h][w] = green1 + ((green2 - green1) * h / RuleSetUtil.HEIGHT);
-				diff_green2 = green3 + ((green4 - green3) * h / RuleSetUtil.HEIGHT);
-				green[h][w] += ((diff_green2 - green[h][w]) * w / RuleSetUtil.WIDTH);
+				green[h][w] = green1 + ((green2 - green1) * h / HEIGHT);
+				diff_green2 = green3 + ((green4 - green3) * h / HEIGHT);
+				green[h][w] += ((diff_green2 - green[h][w]) * w / WIDTH);
 			}
 	}
 
@@ -125,16 +122,16 @@ public final class AndroidGameOfLifeView extends View {
 	 */
 	public void onDraw(Canvas canvas) {
 		canvas.drawRect((float) 0, (float) 0, (float) getWidth(),
-				(float) getHeight(), white);
+				(float) getHeight(), background);
 
-		for (int h = 0; h < RuleSetUtil.HEIGHT; h++)
-			for (int w = 0; w < RuleSetUtil.WIDTH; w++)
+		for (int h = 0; h < HEIGHT; h++)
+			for (int w = 0; w < WIDTH; w++)
 				if (map[h][w]) {
-					paint.setARGB(255, red[h][w], green[h][w], blue[h][w]);
-					canvas.drawRect(w * RuleSetUtil.CELL_SIZE, h
-							* RuleSetUtil.CELL_SIZE, (w * RuleSetUtil.CELL_SIZE)
-							+ RuleSetUtil.CELL_SIZE, (h * RuleSetUtil.CELL_SIZE)
-							+ RuleSetUtil.CELL_SIZE, paint);
+					foreground.setARGB(255, red[h][w], green[h][w], blue[h][w]);
+					canvas.drawRect(w * CELL_SIZE, h
+							* CELL_SIZE, (w * CELL_SIZE)
+							+ CELL_SIZE, (h * CELL_SIZE)
+							+ CELL_SIZE, foreground);
 				}
 	}
 
@@ -150,14 +147,40 @@ public final class AndroidGameOfLifeView extends View {
 	}
 
 	/**
+	 * Method to initiate games RuleSet.
+	 */
+	public void initGameRules(){
+		// set Conway as initial ruleset
+		gameRule = new int[9];
+		gameRule[0] = Agol.DEATH_RULE;
+		gameRule[1] = Agol.DEATH_RULE;
+		gameRule[2] = Agol.UNDEFINED;
+		gameRule[3] = Agol.BIRTH_RULE;
+		gameRule[4] = Agol.DEATH_RULE;
+		gameRule[5] = Agol.DEATH_RULE;
+		gameRule[6] = Agol.DEATH_RULE;
+		gameRule[7] = Agol.DEATH_RULE;
+		gameRule[8] = Agol.DEATH_RULE;
+		Agol.setRuleSet(gameRule);
+	}
+	
+	/**
+	 * This method can be used
+	 * to update the games RuleSet.
+	 */
+	public void updateGameRules(){
+		gameRule = Agol.getRuleSet();
+	}
+	
+	/**
 	 * This method will initiate our first map.
 	 */
 	public void initMap() {
 
-		map = new boolean[RuleSetUtil.HEIGHT][RuleSetUtil.WIDTH];
+		map = new boolean[HEIGHT][WIDTH];
 		
-		int xOffset = RuleSetUtil.HEIGHT / 2 - 10;
-		int yOffset = RuleSetUtil.WIDTH / 2 - 7;
+		int xOffset = HEIGHT / 2 - 10;
+		int yOffset = WIDTH / 2 - 7;
 		
 		/**
 		 * Printing Logo screen (16 * 14 cells)
@@ -268,8 +291,8 @@ public final class AndroidGameOfLifeView extends View {
 	@Override
 	public boolean dispatchTouchEvent(MotionEvent event) {
 
-		int tempY = (int) event.getY() / RuleSetUtil.CELL_SIZE;
-		int tempX = (int) event.getX() / RuleSetUtil.CELL_SIZE;
+		int tempY = (int) event.getY() / CELL_SIZE;
+		int tempX = (int) event.getX() / CELL_SIZE;
 
 		switch (event.getAction()) {
 		case MotionEvent.ACTION_DOWN:
@@ -319,7 +342,48 @@ public final class AndroidGameOfLifeView extends View {
 	 */
 	public void runLoop() {
 		new Thread(new Runnable() {
+			
+			/**
+			 * This will apply the game rule considering the neigbourhood.
+			 * 
+			 * @param region
+			 *            neigbourhood
+			 * @return state of cell in next cycle
+			 */
+			public boolean apply(boolean[][] region) {
+				/**
+				 * initial status of cell.
+				 */
+				boolean status = region[1][1];
 
+				/**
+				 * counting neighbours.
+				 */
+				int neighbours = 0;
+				if (status)
+					neighbours--;
+				for (int x = 0; x < 3; x++)
+					for (int y = 0; y < 3; y++)
+						if (region[x][y])
+							neighbours++;
+
+				/**
+				 * apply rules
+				 */
+				int destiny = gameRule[neighbours];
+
+				if (destiny == Agol.DEATH_RULE)
+					return false;
+
+				if (destiny == Agol.BIRTH_RULE)
+					return true;
+
+				/**
+				 * destiny is undefined.
+				 */
+				return status;
+			}
+			
 			@Override
 			public void run() {
 
@@ -336,7 +400,7 @@ public final class AndroidGameOfLifeView extends View {
 					/**
 					 * Generation that will life the next cycle.
 					 */
-					boolean[][] nextGen = new boolean[RuleSetUtil.HEIGHT][RuleSetUtil.WIDTH];
+					boolean[][] nextGen = new boolean[HEIGHT][WIDTH];
 
 					/*
 					 * AFTER HOURS OF SERIOUS BRAIN MALFUNCTIONS, I CAME UP WITH
@@ -346,81 +410,81 @@ public final class AndroidGameOfLifeView extends View {
 					 * 20 21 22
 					 * everything else it's neighbours 
 					 */
-					for (int h = 0; h < RuleSetUtil.HEIGHT; h++) {
-						for (int w = 0; w < RuleSetUtil.WIDTH; w++) {
+					for (int h = 0; h < HEIGHT; h++) {
+						for (int w = 0; w < WIDTH; w++) {
 
 							// first row
 							// 00
 							if (h - 1 >= 0 && w - 1 >= 0)
 								region[0][0] = map[h - 1][w - 1];
 							else if (h - 1 < 0 && w - 1 >= 0)
-								region[0][0] = map[RuleSetUtil.HEIGHT - 1][w - 1];
+								region[0][0] = map[HEIGHT - 1][w - 1];
 							else if (h - 1 >= 0 && w - 1 < 0)
-								region[0][0] = map[h - 1][RuleSetUtil.WIDTH - 1];
+								region[0][0] = map[h - 1][WIDTH - 1];
 							else if (h - 1 < 0 && w - 1 < 0)
-								region[0][0] = map[RuleSetUtil.HEIGHT - 1][RuleSetUtil.WIDTH - 1];
+								region[0][0] = map[HEIGHT - 1][WIDTH - 1];
 
 							// 01
 							if (h - 1 >= 0)
 								region[0][1] = map[h - 1][w];
 							else
-								region[0][1] = map[RuleSetUtil.HEIGHT - 1][w];
+								region[0][1] = map[HEIGHT - 1][w];
 
 							// 02
-							if (h - 1 >= 0 && w < RuleSetUtil.WIDTH - 1)
+							if (h - 1 >= 0 && w < WIDTH - 1)
 								region[0][2] = map[h - 1][w + 1];
-							else if (h - 1 < 0 && w < RuleSetUtil.WIDTH - 1)
-								region[0][2] = map[RuleSetUtil.HEIGHT - 1][w + 1];
-							else if (h - 1 >= 0 && w >= RuleSetUtil.WIDTH - 1)
+							else if (h - 1 < 0 && w < WIDTH - 1)
+								region[0][2] = map[HEIGHT - 1][w + 1];
+							else if (h - 1 >= 0 && w >= WIDTH - 1)
 								region[0][2] = map[h - 1][0];
-							else if (h - 1 < 0 && w >= RuleSetUtil.WIDTH - 1)
-								region[0][2] = map[RuleSetUtil.HEIGHT - 1][0];
+							else if (h - 1 < 0 && w >= WIDTH - 1)
+								region[0][2] = map[HEIGHT - 1][0];
 
 							// middle row
 							// 10
 							if (w - 1 >= 0)
 								region[1][0] = map[h][w - 1];
 							else
-								region[1][0] = map[h][RuleSetUtil.WIDTH - 1];
+								region[1][0] = map[h][WIDTH - 1];
 
 							// 11
 							region[1][1] = map[h][w];
 
 							// 12
-							if (w < RuleSetUtil.WIDTH - 1)
+							if (w < WIDTH - 1)
 								region[1][2] = map[h][w + 1];
 							else
 								region[1][2] = map[h][0];
 
 							// last row
 							// 20
-							if (h < RuleSetUtil.HEIGHT - 1 && w - 1 >= 0)
+							if (h < HEIGHT - 1 && w - 1 >= 0)
 								region[2][0] = map[h + 1][w - 1];
-							else if (h >= RuleSetUtil.HEIGHT - 1 && w - 1 >= 0)
+							else if (h >= HEIGHT - 1 && w - 1 >= 0)
 								region[2][0] = map[0][w - 1];
-							else if (h < RuleSetUtil.HEIGHT - 1 && w - 1 < 0)
-								region[2][0] = map[h + 1][RuleSetUtil.WIDTH - 1];
-							else if (h >= RuleSetUtil.HEIGHT - 1 && w - 1 < 0)
-								region[2][0] = map[0][RuleSetUtil.WIDTH - 1];
+							else if (h < HEIGHT - 1 && w - 1 < 0)
+								region[2][0] = map[h + 1][WIDTH - 1];
+							else if (h >= HEIGHT - 1 && w - 1 < 0)
+								region[2][0] = map[0][WIDTH - 1];
 
 							// 21
-							if (h < RuleSetUtil.HEIGHT - 1)
+							if (h < HEIGHT - 1)
 								region[2][1] = map[h + 1][w];
 							else
 								region[2][1] = map[0][w];
 
 							// 22
-							if (h < RuleSetUtil.HEIGHT - 1 && w < RuleSetUtil.WIDTH - 1)
+							if (h < HEIGHT - 1 && w < WIDTH - 1)
 								region[2][2] = map[h + 1][w + 1];
-							else if (h >= RuleSetUtil.HEIGHT - 1 && w < RuleSetUtil.WIDTH - 1)
+							else if (h >= HEIGHT - 1 && w < WIDTH - 1)
 								region[2][2] = map[0][w + 1];
-							else if (h < RuleSetUtil.HEIGHT - 1 && w >= RuleSetUtil.WIDTH - 1)
+							else if (h < HEIGHT - 1 && w >= WIDTH - 1)
 								region[2][2] = map[h + 1][0];
-							else if (h >= RuleSetUtil.HEIGHT - 1 && w >= RuleSetUtil.WIDTH - 1)
+							else if (h >= HEIGHT - 1 && w >= WIDTH - 1)
 								region[2][2] = map[0][0];
 
 							// ----------------------------
-							nextGen[h][w] = RuleSetUtil.apply(region);
+							nextGen[h][w] = apply(region);
 						}
 					}
 					map = nextGen;
