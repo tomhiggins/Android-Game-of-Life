@@ -7,29 +7,32 @@
     <string name="stopgame">Stop</string>
     <string name="death">Death</string>
     <string name="birth">Birth</string>
-    <string name="s1">1</string>
-    <string name="s2">2</string>
-    <string name="s3">3</string>
-    <string name="s4">4</string>
-    <string name="s5">5</string>
-    <string name="s6">6</string>
-    <string name="s7">7</string>
-    <string name="s8">8</string>
-    <string name="Neighbours">Neighbours:</string>
+    <string name="s1">1 neighbour cell\nin close proximity.</string>
+    <string name="s2">2 neighbour cells\nin close proximity.</string>
+    <string name="s3">3 neighbour cells\nin close proximity.</string>
+    <string name="s4">4 neighbour cells\nin close proximity.</string>
+    <string name="s5">5 neighbour cells\nin close proximity.</string>
+    <string name="s6">6 neighbour cells\nin close proximity.</string>
+    <string name="s7">7 neighbour cells\nin close proximity.</string>
+    <string name="s8">8 neighbour cells\nin close proximity.</string>
+    <string name="Neighbours">Cell behavior</string>
     <string name="ruleeditor">Rule Editor</string>
-    <string name="s0">0</string>
+    <string name="s0">No neighbour cells\nin close proximity.</string>
     <string name="undefined">undef.</string>
-    <string name="load">Load Ruleset</string>
-    <string name="rule_name">Enter a name for your rule</string>
-    <string name="save">Save Ruleset</string>
+    <string name="load">Load</string>
+    <string name="rule_name">Rule Name</string>
+    <string name="save">Save</string>
     <string name="save_warning">You need to enter a name for your ruleset before you can save!</string>
-    <string name="delete">Delete Ruleset</string>
+    <string name="delete">Delete</string>
     <string name="deleted_ruleset">You have successfully deleted the ruleset </string>
     <string name="deleted_ruleset_warning">Do you really want to delete the ruleset</string>
     <string name="yes">Yes</string>
     <string name="no">No</string>
     <string name="ok">OK</string>
     <string name="pick_ruleset">Pick a ruleset</string>
+    <string name="empty"></string>
+    <string name="checkbox_explanation">Birth / Death / undef.</string>
+    <string name="rule_name_explanation">Name your customized rule.</string>
     
 
 </resources>

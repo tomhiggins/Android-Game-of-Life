@@ -1,300 +1,355 @@
 <?xml version="1.0" encoding="utf-8"?>
 <TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/TableLayout1"
-    android:layout_width="fill_parent"
+    android:layout_width="wrap_content"
     android:layout_height="fill_parent"
+    android:layout_marginLeft="10dip"
     android:stretchColumns="0" >
 
-    <TableRow>
+    <TableRow android:layout_marginLeft="10dip" >
 
         <TextView
             android:id="@+id/textView0"
-            android:layout_gravity="center"
-            android:text="@string/s0" />
+            android:text="@string/rule_name"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
 
-        <RadioGroup
-            android:id="@+id/radioGroup0"
-            android:layout_marginRight="20dip"
-            android:orientation="horizontal" >
-
-            <RadioButton
-                android:id="@+id/radioBirth0"
-                android:layout_marginRight="15dip"
-                android:checked="true"
-                android:text="@string/birth" />
-
-            <RadioButton
-                android:id="@+id/radioDeath0"
-                android:layout_marginRight="15dip"
-                android:text="@string/death" />
-
-            <RadioButton
-                android:id="@+id/radioundef0"
-                android:text="@string/undefined" />
-
-        </RadioGroup>
-        
-    </TableRow>
-    
-    <TableRow>
-
-        <TextView
-            android:id="@+id/textView1"
-            android:layout_gravity="center"
-            android:text="@string/s1" />
-
-        <RadioGroup
-            android:id="@+id/radioGroup1"
-            android:layout_marginRight="20dip"
-            android:orientation="horizontal" >
-
-            <RadioButton
-                android:id="@+id/radioBirth1"
-                android:layout_marginRight="15dip"
-                android:checked="true"
-                android:text="@string/birth" />
-
-            <RadioButton
-                android:id="@+id/radioDeath1"
-                android:layout_marginRight="15dip"
-                android:text="@string/death" />
-
-            <RadioButton
-                android:id="@+id/radioundef1"
-                android:text="@string/undefined" />
-
-        </RadioGroup>
-        
-    </TableRow>
-    
-    <TableRow>
-
-        <TextView
-            android:id="@+id/textView2"
-            android:layout_gravity="center"
-            android:text="@string/s2" />
-
-        <RadioGroup
-            android:id="@+id/radioGroup2"
-            android:layout_marginRight="20dip"
-            android:orientation="horizontal" >
-
-            <RadioButton
-                android:id="@+id/radioBirth2"
-                android:layout_marginRight="15dip"
-                android:checked="true"
-                android:text="@string/birth" />
-
-            <RadioButton
-                android:id="@+id/radioDeath2"
-                android:layout_marginRight="15dip"
-                android:text="@string/death" />
-
-            <RadioButton
-                android:id="@+id/radioundef2"
-                android:text="@string/undefined" />
-
-        </RadioGroup>
-        
-    </TableRow>
-    
-    <TableRow>
-
-        <TextView
-            android:id="@+id/textView3"
-            android:layout_gravity="center"
-            android:text="@string/s3" />
-
-        <RadioGroup
-            android:id="@+id/radioGroup3"
-            android:layout_marginRight="20dip"
-            android:orientation="horizontal" >
-
-            <RadioButton
-                android:id="@+id/radioBirth3"
-                android:layout_marginRight="15dip"
-                android:checked="true"
-                android:text="@string/birth" />
-
-            <RadioButton
-                android:id="@+id/radioDeath3"
-                android:layout_marginRight="15dip"
-                android:text="@string/death" />
-
-            <RadioButton
-                android:id="@+id/radioundef3"
-                android:text="@string/undefined" />
-
-        </RadioGroup>
-        
-    </TableRow>
-    
-    <TableRow>
-
-        <TextView
-            android:id="@+id/textView4"
-            android:layout_gravity="center"
-            android:text="@string/s4" />
-
-        <RadioGroup
-            android:id="@+id/radioGroup4"
-            android:layout_marginRight="20dip"
-            android:orientation="horizontal" >
-
-            <RadioButton
-                android:id="@+id/radioBirth4"
-                android:layout_marginRight="15dip"
-                android:checked="true"
-                android:text="@string/birth" />
-
-            <RadioButton
-                android:id="@+id/radioDeath4"
-                android:layout_marginRight="15dip"
-                android:text="@string/death" />
-
-            <RadioButton
-                android:id="@+id/radioundef4"
-                android:text="@string/undefined" />
-
-        </RadioGroup>
-        
-    </TableRow>
-    
-    <TableRow>
-
-        <TextView
-            android:id="@+id/textView5"
-            android:layout_gravity="center"
-            android:text="@string/s5" />
-
-        <RadioGroup
-            android:id="@+id/radioGroup5"
-            android:layout_marginRight="20dip"
-            android:orientation="horizontal" >
-
-            <RadioButton
-                android:id="@+id/radioBirth5"
-                android:layout_marginRight="15dip"
-                android:checked="true"
-                android:text="@string/birth" />
-
-            <RadioButton
-                android:id="@+id/radioDeath5"
-                android:layout_marginRight="15dip"
-                android:text="@string/death" />
-
-            <RadioButton
-                android:id="@+id/radioundef5"
-                android:text="@string/undefined" />
-
-        </RadioGroup>
-        
-    </TableRow>
-    
-    <TableRow>
-
-        <TextView
-            android:id="@+id/textView6"
-            android:layout_gravity="center"
-            android:text="@string/s6" />
-
-        <RadioGroup
-            android:id="@+id/radioGroup6"
-            android:layout_marginRight="20dip"
-            android:orientation="horizontal" >
-
-            <RadioButton
-                android:id="@+id/radioBirth6"
-                android:layout_marginRight="15dip"
-                android:checked="true"
-                android:text="@string/birth" />
-
-            <RadioButton
-                android:id="@+id/radioDeath6"
-                android:layout_marginRight="15dip"
-                android:text="@string/death" />
-
-            <RadioButton
-                android:id="@+id/radioundef6"
-                android:text="@string/undefined" />
-
-        </RadioGroup>
-        
-    </TableRow>
-    
-    <TableRow>
-
-        <TextView
-            android:id="@+id/textView7"
-            android:layout_gravity="center"
-            android:text="@string/s7" />
-
-        <RadioGroup
-            android:id="@+id/radioGroup7"
-            android:layout_marginRight="20dip"
-            android:orientation="horizontal" >
-
-            <RadioButton
-                android:id="@+id/radioBirth7"
-                android:layout_marginRight="15dip"
-                android:checked="true"
-                android:text="@string/birth" />
-
-            <RadioButton
-                android:id="@+id/radioDeath7"
-                android:layout_marginRight="15dip"
-                android:text="@string/death" />
-
-            <RadioButton
-                android:id="@+id/radioundef7"
-                android:text="@string/undefined" />
-
-        </RadioGroup>
-        
-    </TableRow>
-    
-    <TableRow>
-
-        <TextView
-            android:id="@+id/textView8"
-            android:layout_gravity="center"
-            android:text="@string/s8" />
-
-        <RadioGroup
-            android:id="@+id/radioGroup8"
-            android:layout_marginRight="20dip"
-            android:orientation="horizontal" >
-
-            <RadioButton
-                android:id="@+id/radioBirth8"
-                android:layout_marginRight="15dip"
-                android:checked="true"
-                android:text="@string/birth" />
-
-            <RadioButton
-                android:id="@+id/radioDeath8"
-                android:layout_marginRight="15dip"
-                android:text="@string/death" />
-
-            <RadioButton
-                android:id="@+id/radioButton8"
-                android:text="@string/undefined" />
-
-        </RadioGroup>
+        <EditText
+            android:id="@+id/editTextName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="5dip" >
+            <requestFocus />
+        </EditText>
         
     </TableRow>
 
     <TableRow >
 
-        <EditText
-            android:id="@+id/editTextName"
-            android:layout_span="3"
-            android:hint="@string/rule_name"
-            android:inputType="textCapCharacters" >
+        <TextView
+            android:layout_marginLeft="10dip"
+            android:text="@string/Neighbours"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
 
-            <requestFocus />
-        </EditText>
+        <TextView
+            android:gravity="right"
+            android:text="@string/checkbox_explanation" />
+    </TableRow>
 
+    <TableRow android:gravity="center_vertical" >
+
+        <TextView
+            android:id="@+id/textView0"
+            android:layout_marginLeft="10dip"
+            android:lines="2"
+            android:text="@string/s0"
+            android:width="80dip" />
+
+        <RadioGroup
+            android:id="@+id/radioGroup0"
+            android:layout_height="45dip"
+            android:layout_marginRight="5dip"
+            android:gravity="right"
+            android:orientation="horizontal" >
+
+            <RadioButton
+                android:id="@+id/radioBirth0"
+                android:layout_height="45dip"
+                android:layout_marginRight="5dip"
+                android:checked="true"
+                android:text="@string/empty" />
+
+            <RadioButton
+                android:id="@+id/radioDeath0"
+                android:layout_height="45dip"
+                android:layout_marginRight="5dip"
+                android:text="@string/empty" />
+
+            <RadioButton
+                android:id="@+id/radioundef0"
+                android:layout_height="45dip"
+                android:text="@string/empty" />
+        </RadioGroup>
+    </TableRow>
+
+    <TableRow android:gravity="center_vertical" >
+
+        <TextView
+            android:id="@+id/textView1"
+            android:layout_marginLeft="10dip"
+            android:lines="2"
+            android:text="@string/s1"
+            android:width="80dip" />
+
+        <RadioGroup
+            android:id="@+id/radioGroup1"
+            android:layout_height="45dip"
+            android:layout_marginRight="5dip"
+            android:gravity="right"
+            android:orientation="horizontal" >
+
+            <RadioButton
+                android:id="@+id/radioBirth1"
+                android:layout_height="45dip"
+                android:layout_marginRight="5dip"
+                android:checked="true"
+                android:text="@string/empty" />
+
+            <RadioButton
+                android:id="@+id/radioDeath1"
+                android:layout_height="45dip"
+                android:layout_marginRight="5dip"
+                android:text="@string/empty" />
+
+            <RadioButton
+                android:id="@+id/radioundef1"
+                android:layout_height="45dip"
+                android:text="@string/empty" />
+        </RadioGroup>
+    </TableRow>
+
+    <TableRow android:gravity="center_vertical" >
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_marginLeft="10dip"
+            android:gravity="left"
+            android:text="@string/s2" />
+
+        <RadioGroup
+            android:id="@+id/radioGroup2"
+            android:layout_height="45dip"
+            android:layout_marginRight="5dip"
+            android:gravity="right"
+            android:orientation="horizontal" >
+
+            <RadioButton
+                android:id="@+id/radioBirth2"
+                android:layout_height="45dip"
+                android:layout_marginRight="5dip"
+                android:checked="true"
+                android:text="@string/empty" />
+
+            <RadioButton
+                android:id="@+id/radioDeath2"
+                android:layout_height="45dip"
+                android:layout_marginRight="5dip"
+                android:text="@string/empty" />
+
+            <RadioButton
+                android:id="@+id/radioundef2"
+                android:layout_height="45dip"
+                android:text="@string/empty" />
+        </RadioGroup>
+    </TableRow>
+
+    <TableRow android:gravity="center_vertical" >
+
+        <TextView
+            android:id="@+id/textView3"
+            android:layout_marginLeft="10dip"
+            android:gravity="left"
+            android:text="@string/s3" />
+
+        <RadioGroup
+            android:id="@+id/radioGroup3"
+            android:layout_height="45dip"
+            android:layout_marginRight="5dip"
+            android:gravity="right"
+            android:orientation="horizontal" >
+
+            <RadioButton
+                android:id="@+id/radioBirth3"
+                android:layout_height="45dip"
+                android:layout_marginRight="5dip"
+                android:checked="true"
+                android:text="@string/empty" />
+
+            <RadioButton
+                android:id="@+id/radioDeath3"
+                android:layout_height="45dip"
+                android:layout_marginRight="5dip"
+                android:text="@string/empty" />
+
+            <RadioButton
+                android:id="@+id/radioundef3"
+                android:layout_height="45dip"
+                android:text="@string/empty" />
+        </RadioGroup>
+    </TableRow>
+
+    <TableRow android:gravity="center_vertical" >
+
+        <TextView
+            android:id="@+id/textView4"
+            android:layout_marginLeft="10dip"
+            android:gravity="left"
+            android:text="@string/s4" />
+
+        <RadioGroup
+            android:id="@+id/radioGroup4"
+            android:layout_height="45dip"
+            android:layout_marginRight="5dip"
+            android:gravity="right"
+            android:orientation="horizontal" >
+
+            <RadioButton
+                android:id="@+id/radioBirth4"
+                android:layout_height="45dip"
+                android:layout_marginRight="5dip"
+                android:checked="true"
+                android:text="@string/empty" />
+
+            <RadioButton
+                android:id="@+id/radioDeath4"
+                android:layout_height="45dip"
+                android:layout_marginRight="5dip"
+                android:text="@string/empty" />
+
+            <RadioButton
+                android:id="@+id/radioundef4"
+                android:layout_height="45dip"
+                android:text="@string/empty" />
+        </RadioGroup>
+    </TableRow>
+
+    <TableRow android:gravity="center_vertical" >
+
+        <TextView
+            android:id="@+id/textView5"
+            android:layout_marginLeft="10dip"
+            android:gravity="left"
+            android:text="@string/s5" />
+
+        <RadioGroup
+            android:id="@+id/radioGroup5"
+            android:layout_height="45dip"
+            android:layout_marginRight="5dip"
+            android:gravity="right"
+            android:orientation="horizontal" >
+
+            <RadioButton
+                android:id="@+id/radioBirth5"
+                android:layout_height="45dip"
+                android:layout_marginRight="5dip"
+                android:checked="true"
+                android:text="@string/empty" />
+
+            <RadioButton
+                android:id="@+id/radioDeath5"
+                android:layout_height="45dip"
+                android:layout_marginRight="5dip"
+                android:text="@string/empty" />
+
+            <RadioButton
+                android:id="@+id/radioundef5"
+                android:layout_height="45dip"
+                android:text="@string/empty" />
+        </RadioGroup>
+    </TableRow>
+
+    <TableRow android:gravity="center_vertical" >
+
+        <TextView
+            android:id="@+id/textView6"
+            android:layout_marginLeft="10dip"
+            android:gravity="left"
+            android:text="@string/s6" />
+
+        <RadioGroup
+            android:id="@+id/radioGroup6"
+            android:layout_height="45dip"
+            android:layout_marginRight="5dip"
+            android:gravity="right"
+            android:orientation="horizontal" >
+
+            <RadioButton
+                android:id="@+id/radioBirth6"
+                android:layout_height="45dip"
+                android:layout_marginRight="5dip"
+                android:checked="true"
+                android:text="@string/empty" />
+
+            <RadioButton
+                android:id="@+id/radioDeath6"
+                android:layout_height="45dip"
+                android:layout_marginRight="5dip"
+                android:text="@string/empty" />
+
+            <RadioButton
+                android:id="@+id/radioundef6"
+                android:layout_height="45dip"
+                android:text="@string/empty" />
+        </RadioGroup>
+    </TableRow>
+
+    <TableRow android:gravity="center_vertical" >
+
+        <TextView
+            android:id="@+id/textView7"
+            android:layout_marginLeft="10dip"
+            android:gravity="left"
+            android:text="@string/s7" />
+
+        <RadioGroup
+            android:id="@+id/radioGroup7"
+            android:layout_height="45dip"
+            android:layout_marginRight="5dip"
+            android:gravity="right"
+            android:orientation="horizontal" >
+
+            <RadioButton
+                android:id="@+id/radioBirth7"
+                android:layout_height="45dip"
+                android:layout_marginRight="5dip"
+                android:checked="true"
+                android:text="@string/empty" />
+
+            <RadioButton
+                android:id="@+id/radioDeath7"
+                android:layout_height="45dip"
+                android:layout_marginRight="5dip"
+                android:text="@string/empty" />
+
+            <RadioButton
+                android:id="@+id/radioundef7"
+                android:layout_height="45dip"
+                android:text="@string/empty" />
+        </RadioGroup>
+    </TableRow>
+
+    <TableRow android:gravity="center_vertical" >
+
+        <TextView
+            android:id="@+id/textView8"
+            android:layout_marginLeft="10dip"
+            android:gravity="left"
+            android:text="@string/s8" />
+
+        <RadioGroup
+            android:id="@+id/radioGroup8"
+            android:layout_height="45dip"
+            android:layout_marginRight="5dip"
+            android:gravity="right"
+            android:orientation="horizontal" >
+
+            <RadioButton
+                android:id="@+id/radioBirth8"
+                android:layout_height="45dip"
+                android:layout_marginRight="5dip"
+                android:checked="true"
+                android:text="@string/empty" />
+
+            <RadioButton
+                android:id="@+id/radioDeath8"
+                android:layout_height="45dip"
+                android:layout_marginRight="5dip"
+                android:text="@string/empty" />
+
+            <RadioButton
+                android:id="@+id/radioButton8"
+                android:layout_height="45dip"
+                android:text="@string/empty" />
+        </RadioGroup>
     </TableRow>
 
 </TableLayout>

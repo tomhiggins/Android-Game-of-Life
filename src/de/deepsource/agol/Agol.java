@@ -11,7 +11,7 @@ public class Agol extends Application {
 	/**
 	 * Identifier for the application name.
 	 */
-	public static final String APP_NAME = "deepnotes";
+	public static final String APP_NAME = "Android Game of Life";
 	
 	/**
 	 * Identifier for the fact, that the rule is undefined.
