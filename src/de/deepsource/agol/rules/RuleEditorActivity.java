@@ -126,7 +126,7 @@ public class RuleEditorActivity extends Activity {
 	/**
 	 * Creates an AlertDialog that asks the user to pick a RuleSet that should 
 	 * be deleted from the database. If the user does not cancel the dialog
-	 * another dialog will ask if he really wants to delete the selected RuleSet.
+	 * another dialog will ask if he really wants to delete the selected {@link RuleSet}.
 	 */
 	private void deleteRuleSet() {
 		// open connection to db
@@ -185,7 +185,7 @@ public class RuleEditorActivity extends Activity {
 	}
 
 	/**
-	 * Saves the current state of the RadioGroup objects as a RuleSet in the 
+	 * Saves the current state of the RadioGroup objects as a {@link RuleSet} in the 
 	 * database, if the user entered a name for it. If the user did not enter 
 	 * a name he will be asked to do so.
 	 */
@@ -219,7 +219,7 @@ public class RuleEditorActivity extends Activity {
 	}
 	
 	/**
-	 * Creates an AlertDialog that asks the user to pick a RuleSet that should 
+	 * Creates an AlertDialog that asks the user to pick a {@link RuleSet} that should 
 	 * be loaded from the database.
 	 */
 	private void loadRuleSets() {
