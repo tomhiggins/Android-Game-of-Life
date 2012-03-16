@@ -147,7 +147,9 @@ public final class AndroidGameOfLifeView extends View {
 	 * Method to initiate games RuleSet.
 	 */
 	public void initGameRules(){
-		// set Conway as initial ruleset
+		// set Conway as initial rule 
+		// notice: we don't use the database here, because all rules can be deleted
+		// and we want the conway rule to be the initial rule come what ever will!
 		gameRule = new int[9];
 		gameRule[0] = Agol.DEATH_RULE;
 		gameRule[1] = Agol.DEATH_RULE;

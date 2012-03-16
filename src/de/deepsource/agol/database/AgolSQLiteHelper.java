@@ -7,25 +7,86 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
+/**
+ * Creates and upgrades the database for our rules.
+ * 
+ * @author Jan Pretzel (jan.pretzel@deepsource.de)
+ */
 public class AgolSQLiteHelper extends SQLiteOpenHelper {
 	
+	/**
+	 * The table name.
+	 */
 	public static final String TABLE_RULES = "rules";
+	
+	/**
+	 * Name of the id column.
+	 */
 	public static final String COLUMN_ID = "_id";
+	
+	/**
+	 * Name of the column for the rule name.
+	 */
 	public static final String COLUMN_NAME = "name";
+	
+	/**
+	 * Name of the column for the n0 rule.
+	 */
 	public static final String COLUMN_N0 = "n0";
+	
+	/**
+	 * Name of the column for the n1 rule.
+	 */
 	public static final String COLUMN_N1 = "n1";
+	
+	/**
+	 * Name of the column for the n2 rule.
+	 */
 	public static final String COLUMN_N2 = "n2";
+	
+	/**
+	 * Name of the column for the n3 rule.
+	 */
 	public static final String COLUMN_N3 = "n3";
+	
+	/**
+	 * Name of the column for the n4 rule.
+	 */
 	public static final String COLUMN_N4 = "n4";
+	
+	/**
+	 * Name of the column for the n5 rule.
+	 */
 	public static final String COLUMN_N5 = "n5";
+	
+	/**
+	 * Name of the column for the n6 rule.
+	 */
 	public static final String COLUMN_N6 = "n6";
+	
+	/**
+	 * Name of the column for the n7 rule.
+	 */
 	public static final String COLUMN_N7 = "n7";
+	
+	/**
+	 * Name of the column for the n8 rule.
+	 */
 	public static final String COLUMN_N8 = "n8";
 	
+	/**
+	 * The name of the database.
+	 */
 	private static final String DATABASE_NAME = "rules.db";
+	
+	/**
+	 * The Version of the database.
+	 */
 	private static final int DATABASE_VERSION = 1;
 	
-	// sql statement to create database
+	/**
+	 * The SQL statement to create the database.
+	 */
 	private static final String DATABASE_CREATE = "create table "
 			+ TABLE_RULES + "( " 
 			+ COLUMN_ID + " integer primary key autoincrement, " 
@@ -40,6 +101,11 @@ public class AgolSQLiteHelper extends SQLiteOpenHelper {
 			+ COLUMN_N7 + " integer not null, "
 			+ COLUMN_N8 + " integer not null);";
 	
+	/**
+	 * The constructor calls the constructor of SQLiteOpenHelper.
+	 * 
+	 * @param context The context in which the object is instantiated.
+	 */
 	public AgolSQLiteHelper(Context context) {
 		super(context, DATABASE_NAME, null, DATABASE_VERSION);
 	}
@@ -91,6 +157,12 @@ public class AgolSQLiteHelper extends SQLiteOpenHelper {
 		submitToDb(database, values);
 	}
 	
+	/**
+	 * Inserts a row into the database.
+	 * 
+	 * @param database The database to which we will submit.
+	 * @param values The values of the row, that will be inserted.
+	 */
 	private void submitToDb(SQLiteDatabase database, ContentValues values) {
 		long id = database.insert(AgolSQLiteHelper.TABLE_RULES, null, values);
 		
@@ -101,6 +173,7 @@ public class AgolSQLiteHelper extends SQLiteOpenHelper {
 
 	@Override
 	public void onUpgrade(SQLiteDatabase database, int vOld, int vNew) {
+		// 
 		database.execSQL("DROP TABLE IF EXISTS" + TABLE_RULES);
 		onCreate(database);
 	}

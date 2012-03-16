@@ -22,12 +22,28 @@ import de.deepsource.agol.R;
 import de.deepsource.agol.database.RuleSet;
 import de.deepsource.agol.database.RuleSetDataSource;
 
+/**
+ * This activity handles the rule editor.
+ * 
+ * @author Jan Pretzel (jan.pretzel@deepsource.de)
+ */
 public class RuleEditorActivity extends Activity {
 	
+	/**
+	 * A data access object.
+	 */
 	private RuleSetDataSource datasource;
 	
+	/**
+	 * Holds all our RadioGroup Objects. 
+	 * Every RadioGroup contains 3 RadioButtons each for one
+	 * of the different rules.
+	 */
 	private List<RadioGroup> buttons;
 	
+	/**
+	 * Holds the rules.
+	 */
 	private int[] gameRule = new int[9];
 
 	@Override
@@ -37,6 +53,7 @@ public class RuleEditorActivity extends Activity {
 		
 		datasource = new RuleSetDataSource(this);
 		
+		// fill the list with ButtonGroups
 		buttons = new ArrayList<RadioGroup>();
 		buttons.add((RadioGroup) findViewById(R.id.radioGroup0));
 		buttons.add((RadioGroup) findViewById(R.id.radioGroup1));
@@ -48,7 +65,7 @@ public class RuleEditorActivity extends Activity {
 		buttons.add((RadioGroup) findViewById(R.id.radioGroup7));
 		buttons.add((RadioGroup) findViewById(R.id.radioGroup8));
 		
-		// set initial state and listeners
+		// set listeners
 		for (int i = 0; i < buttons.size(); i++) {
 			
 			// add listeners
@@ -75,6 +92,8 @@ public class RuleEditorActivity extends Activity {
 			}
 		}
 		
+		// set initial state of the buttons -> currently used rules
+		gameRule = Agol.getRuleSet();
 		updateRadioButtons();
 	}
 	
@@ -104,17 +123,27 @@ public class RuleEditorActivity extends Activity {
 		return true;
 	}
 	
+	/**
+	 * Creates an AlertDialog that asks the user to pick a RuleSet that should 
+	 * be deleted from the database. If the user does not cancel the dialog
+	 * another dialog will ask if he really wants to delete the selected {@link RuleSet}.
+	 */
 	private void deleteRuleSet() {
+		// open connection to db
 		datasource.open();
 
+		// get all saved RuleSets
 		final List<RuleSet> values = datasource.getAllRulesets();
 		int size = values.size();
+		
+		// create an array that holds the RuleSets names as CharSequence
 		final CharSequence[] items = new CharSequence[size];
 
 		for (int i = 0; i < size; i++) {
 			items[i] = values.get(i).getName();
 		}
 		
+		// we the context as final
 		final Context context = this;
 
 		AlertDialog.Builder builder = new AlertDialog.Builder(context);
@@ -124,6 +153,7 @@ public class RuleEditorActivity extends Activity {
 
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
+				// does the user really want to delete the entry?
 				AlertDialog.Builder builder2 = new AlertDialog.Builder(context);
 				builder2.setMessage(getString(R.string.deleted_ruleset_warning) + " " + items[which] + "?")
 					.setCancelable(true)
@@ -131,6 +161,8 @@ public class RuleEditorActivity extends Activity {
 						
 						@Override
 						public void onClick(DialogInterface dialog, int which) {
+							
+							// delete entry and tell the user
 							datasource.deleteRuleset(values.get(which));
 							Toast.makeText(getApplicationContext(), getString(R.string.deleted_ruleset) + items[which],
 									Toast.LENGTH_SHORT).show();
@@ -152,13 +184,22 @@ public class RuleEditorActivity extends Activity {
 		alert.show();
 	}
 
+	/**
+	 * Saves the current state of the RadioGroup objects as a {@link RuleSet} in the 
+	 * database, if the user entered a name for it. If the user did not enter 
+	 * a name he will be asked to do so.
+	 */
 	private void saveRuleSet() {
 		TextView name = (TextView) findViewById(R.id.editTextName);
+		
+		// entered a name for the RuleSet?
 		if (name.getText().length() > 0) {
+			// create a new RuleSet object and fill it with data
 			RuleSet ruleSet = new RuleSet();
 			ruleSet.setName(name.getText().toString());
 			ruleSet.setRuleSet(gameRule);
 			
+			// open connection to db and save the RuleSet
 			datasource.open();
 			datasource.createRuleset(ruleSet);
 		} else {
@@ -177,11 +218,19 @@ public class RuleEditorActivity extends Activity {
 		}
 	}
 	
+	/**
+	 * Creates an AlertDialog that asks the user to pick a {@link RuleSet} that should 
+	 * be loaded from the database.
+	 */
 	private void loadRuleSets() {
+		// open connection to db
 		datasource.open();
 		
+		// get all saved RuleSets
 		final List<RuleSet> values = datasource.getAllRulesets();
 		int size = values.size();
+				
+		// create an array that holds the RuleSets names as CharSequence
 		final CharSequence[] items = new CharSequence[size];
 		
 		for (int i = 0; i < size; i++) {
@@ -195,7 +244,7 @@ public class RuleEditorActivity extends Activity {
 			
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
-				Agol.setRuleSet(values.get(which).getRuleSet());
+				// update state of RadioGroups
 				updateRadioButtons();
 				Toast.makeText(getApplicationContext(), items[which], Toast.LENGTH_SHORT).show();
 			}
@@ -205,8 +254,12 @@ public class RuleEditorActivity extends Activity {
 		alert.show();
 	}
 	
+	/**
+	 * Updates the RadioButton objects by getting the currently, globally used rules
+	 * and apllying it to the RadioButtons.
+	 */
 	private void updateRadioButtons() {
-		gameRule = Agol.getRuleSet();
+		// get the rules
 		RadioButton temp;
 		
 		for (int i = 0; i < buttons.size(); i++) {
@@ -225,7 +278,10 @@ public class RuleEditorActivity extends Activity {
 	
 	@Override
 	protected void onPause() {
+		// close connection to db if opened
 		datasource.close();
+		
+		// be sure to set the rules when leaving the activity
 		Agol.setRuleSet(gameRule);
 		super.onPause();
 	}

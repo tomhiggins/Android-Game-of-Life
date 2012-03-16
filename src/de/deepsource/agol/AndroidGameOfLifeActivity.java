@@ -23,7 +23,7 @@ public class AndroidGameOfLifeActivity extends Activity {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
-		// get device width and height BEFORE initializing DrawViews
+		// get device width and height BEFORE initializing anything else
 		final Display display = getWindowManager().getDefaultDisplay();
 		Agol.setViewportWidth(display.getWidth());
 		Agol.setViewportHeight(display.getHeight());
