@@ -11,7 +11,6 @@ import android.view.View;
  * This View handles drawing of the single life cycles.
  * 
  * @author Sebastian Ullrich
- * @author Jan Pretzel (jan.pretzel@deepsource.de)
  */
 public final class AndroidGameOfLifeView extends View {
 	
@@ -181,7 +180,7 @@ public final class AndroidGameOfLifeView extends View {
 	/**
 	 * Method to initiate games RuleSet.
 	 */
-	public void initGameRules(){
+	public void initGameRules() {
 		// set Conway as initial rule 
 		// notice: we don't use the database here, because all rules can be deleted
 		// and we want the conway rule to be the initial rule come what ever will!
@@ -202,7 +201,7 @@ public final class AndroidGameOfLifeView extends View {
 	 * This method can be used
 	 * to update the games RuleSet.
 	 */
-	public void updateGameRules(){
+	public void updateGameRules() {
 		gameRule = Agol.getRuleSet();
 	}
 	
@@ -437,7 +436,8 @@ public final class AndroidGameOfLifeView extends View {
 					 * 00 01 02 
 					 * 10 11 12 <- 11 is our Cell
 					 * 20 21 22
-					 * everything else is a neighbour 
+					 * everything else is a neighbour
+					 * @coauthor Jan Pretzel
 					 */
 					for (int h = 0; h < HEIGHT; h++) {
 						for (int w = 0; w < WIDTH; w++) {
