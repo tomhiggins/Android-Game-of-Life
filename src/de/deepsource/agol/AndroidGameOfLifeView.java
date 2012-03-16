@@ -340,10 +340,6 @@ public final class AndroidGameOfLifeView extends View {
 			else
 				map[tempY][tempX] = false;
 			break;
-		case MotionEvent.ACTION_MOVE:
-			map[tempY][tempX] = true;
-			break;
-
 		}
 
 		invalidate();
