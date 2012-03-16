@@ -9,20 +9,17 @@ import android.view.View;
 
 /**
  * @author Sebastian Ullrich
- * @mood self-doubting
- * 
- *       This is the super unified jack of all trades class. No more confusing
- *       Model-View-Controller madness.
  */
 public final class AndroidGameOfLifeView extends View {
-	/**
+	
+	/*
 	 * Map and cell size.
 	 */
 	private static final int CELL_SIZE = 10;
 	private static final int HEIGHT = Agol.getViewportHeight() / CELL_SIZE;
 	private static final int WIDTH = Agol.getViewportWidth() / CELL_SIZE;
 	
-	/**
+	/*
 	 * RuleSet
 	 */
 	private static int[] gameRule;
@@ -182,7 +179,7 @@ public final class AndroidGameOfLifeView extends View {
 		int xOffset = HEIGHT / 2 - 10;
 		int yOffset = WIDTH / 2 - 7;
 		
-		/**
+		/*
 		 * Printing Logo screen (16 * 14 cells)
 		 */
 		map[xOffset + 0][yOffset + 0] = true;
@@ -285,9 +282,6 @@ public final class AndroidGameOfLifeView extends View {
 		map[xOffset + 16][yOffset + 14] = true;
 	}
 
-	/**
-	 * Super techy android stuff!
-	 */
 	@Override
 	public boolean dispatchTouchEvent(MotionEvent event) {
 
@@ -335,7 +329,7 @@ public final class AndroidGameOfLifeView extends View {
 	}
 
 	/**
-	 * MAIN GAME LOGIC. This method will draw a lot of screenmagic.
+	 * MAIN GAME LOGIC. This method will draw a lot of screencandy.
 	 * 
 	 * @param rule
 	 *            Game of Life RuleSet
@@ -351,12 +345,12 @@ public final class AndroidGameOfLifeView extends View {
 			 * @return state of cell in next cycle
 			 */
 			public boolean apply(boolean[][] region) {
-				/**
+				/*
 				 * initial status of cell.
 				 */
 				boolean status = region[1][1];
 
-				/**
+				/*
 				 * counting neighbours.
 				 */
 				int neighbours = 0;
@@ -367,7 +361,7 @@ public final class AndroidGameOfLifeView extends View {
 						if (region[x][y])
 							neighbours++;
 
-				/**
+				/*
 				 * apply rules
 				 */
 				int destiny = gameRule[neighbours];
@@ -378,7 +372,7 @@ public final class AndroidGameOfLifeView extends View {
 				if (destiny == Agol.BIRTH_RULE)
 					return true;
 
-				/**
+				/*
 				 * destiny is undefined.
 				 */
 				return status;
@@ -387,28 +381,26 @@ public final class AndroidGameOfLifeView extends View {
 			@Override
 			public void run() {
 
-				/**
+				/*
 				 * This will be the neigbourhood of interest.
 				 */
 				boolean[][] region = new boolean[3][3];
 
-				/**
+				/*
 				 * The Animation loop.
 				 */
 				while (LOCKED) {
 
-					/**
+					/*
 					 * Generation that will life the next cycle.
 					 */
 					boolean[][] nextGen = new boolean[HEIGHT][WIDTH];
 
 					/*
-					 * AFTER HOURS OF SERIOUS BRAIN MALFUNCTIONS, I CAME UP WITH
-					 * THIS ... !!! 
 					 * 00 01 02 
 					 * 10 11 12 <- 11 is our Cell
 					 * 20 21 22
-					 * everything else it's neighbours 
+					 * everything else is a neighbour 
 					 */
 					for (int h = 0; h < HEIGHT; h++) {
 						for (int w = 0; w < WIDTH; w++) {
