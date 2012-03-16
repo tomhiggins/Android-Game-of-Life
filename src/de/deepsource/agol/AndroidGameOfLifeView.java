@@ -8,36 +8,60 @@ import android.view.MotionEvent;
 import android.view.View;
 
 /**
+ * This View handles drawing of the single life cycles.
+ * 
  * @author Sebastian Ullrich
  */
 public final class AndroidGameOfLifeView extends View {
 	
-	/*
+	/**
 	 * Static variables storing map and cell size.
 	 */
 	private static final int CELL_SIZE = 10;
+	
+	/**
+	 * Height of Screen. Will be used for calculating size of map.
+	 */
 	private static final int HEIGHT = Agol.getViewportHeight() / CELL_SIZE;
+	
+	/**
+	 * Width of Screen. Will be used for calculating size of map.
+	 */
 	private static final int WIDTH = Agol.getViewportWidth() / CELL_SIZE;
 	
-	/*
-	 * This will specify the RuleSet that will be used.
+	/**
+	 * The RuleSet that will be used.
 	 */
 	private static int[] gameRule;
 	
+	/**
+	 * Foreground paint colour. Will change dynamicly for each cell,
+	 * depending on its position on map.
+	 */
 	private Paint foreground = new Paint();
+	
+	/**
+	 * Background colour.
+	 */
 	private Paint background = new Paint();
 
+	/**
+	 * Corner colours for calculation the gradient.
+	 */
 	private int[][] red, green, blue;
 
+	/**
+	 * The GameBord. Will hold the current evolution.
+	 */
 	private boolean[][] map;
 
-	/*
-	 * Semaphore, you've probably heard of them.
+	/**
+	 * Semaphore, to controll main draw method.
 	 */
 	private static boolean LOCKED = false;
 
 	/**
-	 * Constructor.
+	 * Default Constructor.
 	 * 
 	 * @param context
 	 *            Context
@@ -47,17 +71,35 @@ public final class AndroidGameOfLifeView extends View {
 		init();
 	}
 
+	/**
+	 * Constructor with custom AttributeSet.
+	 * 
+	 * @param context 
+	 * 		Context
+	 * @param attrs 
+	 * 		Custom AttributeSet
+	 */
 	public AndroidGameOfLifeView(Context context, AttributeSet attrs) {
 		super(context, attrs);
 		init();
 	}
-
+	
+	/**
+	 * Constructor with custom AttributeSet and defStyle.
+	 * @param context Context
+	 * @param attrs	Custom AttributeSet
+	 * @param defSytle Custom defStyle
+	 */
 	public AndroidGameOfLifeView(Context context, AttributeSet attrs,
 			int defSytle) {
 		super(context, attrs, defSytle);
 		init();
 	}
 
+	/**
+	 * This method is used by all constructors. 
+	 * It will initiate all needed variables.
+	 */
 	private void init() {
 		//foreground.setColor(Color.GREEN);
 		background.setARGB(255, 45, 45, 45);
@@ -67,7 +109,7 @@ public final class AndroidGameOfLifeView extends View {
 	}
 
 	/**
-	 * This method will callculate different colour maps.
+	 * This method will callculate a gradient colour map.
 	 */
 	private void initColorArrays() {
 		red = new int[HEIGHT][WIDTH];
@@ -116,6 +158,8 @@ public final class AndroidGameOfLifeView extends View {
 
 	/**
 	 * This will draw our Game of Life.
+	 * 
+	 * @param canvas Canvas to draw on.
 	 */
 	public void onDraw(Canvas canvas) {
 		canvas.drawRect((float) 0, (float) 0, (float) getWidth(),
@@ -135,8 +179,7 @@ public final class AndroidGameOfLifeView extends View {
 	/**
 	 * Method to draw a boolean array.
 	 * 
-	 * @param m
-	 *            array of boolean
+	 * @param m the map to draw.
 	 */
 	private void drawMap(boolean[][] m) {
 		this.map = m;
@@ -146,7 +189,7 @@ public final class AndroidGameOfLifeView extends View {
 	/**
 	 * Method to initiate games RuleSet.
 	 */
-	public void initGameRules(){
+	public void initGameRules() {
 		// set Conway as initial rule 
 		// notice: we don't use the database here, because all rules can be deleted
 		// and we want the conway rule to be the initial rule come what ever will!
@@ -167,7 +210,7 @@ public final class AndroidGameOfLifeView extends View {
 	 * This method can be used
 	 * to update the games RuleSet.
 	 */
-	public void updateGameRules(){
+	public void updateGameRules() {
 		gameRule = Agol.getRuleSet();
 	}
 	
@@ -331,10 +374,10 @@ public final class AndroidGameOfLifeView extends View {
 	}
 
 	/**
-	 * MAIN GAME LOGIC. This method will draw a lot of screencandy.
+	 * MAIN GAME LOGIC. This method will calculate and draw the entire Game of Life.
 	 * 
 	 * @param rule
-	 *            Game of Life RuleSet
+	 *            Game of Life RuleSet.
 	 */
 	public void runLoop() {
 		new Thread(new Runnable() {
@@ -402,7 +445,8 @@ public final class AndroidGameOfLifeView extends View {
 					 * 00 01 02 
 					 * 10 11 12 <- 11 is our Cell
 					 * 20 21 22
-					 * everything else is a neighbour 
+					 * everything else is a neighbour
+					 * @coauthor Jan Pretzel
 					 */
 					for (int h = 0; h < HEIGHT; h++) {
 						for (int w = 0; w < WIDTH; w++) {

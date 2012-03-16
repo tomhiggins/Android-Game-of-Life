@@ -11,12 +11,15 @@ import android.view.MenuItem;
 import de.deepsource.agol.rules.RuleEditorActivity;
 
 /**
- * @author Sebastian Ullrich
+ * TODO: Seriously, such comments suck!
  * 
- * Seriously, No one cares about activities!
+ * @author Sebastian Ullrich
  */
 public class AndroidGameOfLifeActivity extends Activity {
 
+	/**
+	 * TODO
+	 */
 	private AndroidGameOfLifeView agolView;
 
 	@Override
