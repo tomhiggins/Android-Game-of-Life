@@ -13,10 +13,13 @@ import de.deepsource.agol.rules.RuleEditorActivity;
 /**
  * @author Sebastian Ullrich
  * 
- * Seriously, No one cares about activities!
+ * TODO: Seriously, such comments suck!
  */
 public class AndroidGameOfLifeActivity extends Activity {
 
+	/**
+	 * TODO
+	 */
 	private AndroidGameOfLifeView agolView;
 
 	@Override

@@ -8,31 +8,55 @@ import android.view.MotionEvent;
 import android.view.View;
 
 /**
+ * This View handles drawing of the single life cycles.
+ * 
  * @author Sebastian Ullrich
+ * @author Jan Pretzel (jan.pretzel@deepsource.de)
  */
 public final class AndroidGameOfLifeView extends View {
 	
-	/*
-	 * Map and cell size.
+	/**
+	 * TODO: ordentlicher javadoc comment.
 	 */
 	private static final int CELL_SIZE = 10;
+	
+	/**
+	 * TODO: ordentlicher javadoc comment.
+	 */
 	private static final int HEIGHT = Agol.getViewportHeight() / CELL_SIZE;
+	
+	/**
+	 * TODO: ordentlicher javadoc comment.
+	 */
 	private static final int WIDTH = Agol.getViewportWidth() / CELL_SIZE;
 	
-	/*
-	 * RuleSet
+	/**
+	 * TODO: ordentlicher javadoc comment.
 	 */
 	private static int[] gameRule;
 	
+	/**
+	 * TODO: ordentlicher javadoc comment.
+	 */
 	private Paint foreground = new Paint();
+	
+	/**
+	 * TODO: ordentlicher javadoc comment.
+	 */
 	private Paint background = new Paint();
 
+	/**
+	 * TODO: ordentlicher javadoc comment.
+	 */
 	private int[][] red, green, blue;
 
+	/**
+	 * TODO: ordentlicher javadoc comment.
+	 */
 	private boolean[][] map;
 
 	/**
-	 * Semaphore, you've probably heard of them.
+	 * TODO: ordentlicher javadoc comment.
 	 */
 	private static boolean LOCKED = false;
 
@@ -47,17 +71,26 @@ public final class AndroidGameOfLifeView extends View {
 		init();
 	}
 
+	/**
+	 * TODO: ordentlicher javadoc comment.
+	 */
 	public AndroidGameOfLifeView(Context context, AttributeSet attrs) {
 		super(context, attrs);
 		init();
 	}
-
+	
+	/**
+	 * TODO: ordentlicher javadoc comment.
+	 */
 	public AndroidGameOfLifeView(Context context, AttributeSet attrs,
 			int defSytle) {
 		super(context, attrs, defSytle);
 		init();
 	}
 
+	/**
+	 * TODO: ordentlicher javadoc comment.
+	 */
 	private void init() {
 		//foreground.setColor(Color.GREEN);
 		background.setARGB(255, 45, 45, 45);
@@ -116,6 +149,8 @@ public final class AndroidGameOfLifeView extends View {
 
 	/**
 	 * This will draw our Game of Life.
+	 * 
+	 * @param canvas TODO
 	 */
 	public void onDraw(Canvas canvas) {
 		canvas.drawRect((float) 0, (float) 0, (float) getWidth(),
@@ -136,7 +171,7 @@ public final class AndroidGameOfLifeView extends View {
 	 * Method to draw a boolean array.
 	 * 
 	 * @param m
-	 *            array of boolean
+	 *            TODO
 	 */
 	private void drawMap(boolean[][] m) {
 		this.map = m;
@@ -334,7 +369,7 @@ public final class AndroidGameOfLifeView extends View {
 	 * MAIN GAME LOGIC. This method will draw a lot of screencandy.
 	 * 
 	 * @param rule
-	 *            Game of Life RuleSet
+	 *            Game of Life RuleSet.
 	 */
 	public void runLoop() {
 		new Thread(new Runnable() {
