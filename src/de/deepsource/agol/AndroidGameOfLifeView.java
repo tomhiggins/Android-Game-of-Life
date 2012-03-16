@@ -13,14 +13,14 @@ import android.view.View;
 public final class AndroidGameOfLifeView extends View {
 	
 	/*
-	 * Map and cell size.
+	 * Static variables storing map and cell size.
 	 */
 	private static final int CELL_SIZE = 10;
 	private static final int HEIGHT = Agol.getViewportHeight() / CELL_SIZE;
 	private static final int WIDTH = Agol.getViewportWidth() / CELL_SIZE;
 	
 	/*
-	 * RuleSet
+	 * This will specify the RuleSet that will be used.
 	 */
 	private static int[] gameRule;
 	
@@ -31,7 +31,7 @@ public final class AndroidGameOfLifeView extends View {
 
 	private boolean[][] map;
 
-	/**
+	/*
 	 * Semaphore, you've probably heard of them.
 	 */
 	private static boolean LOCKED = false;

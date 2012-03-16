@@ -19,7 +19,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".rules.editor.RuleEditorActivity" android:label="@string/ruleeditor"></activity>
+        <activity android:name=".rules.RuleEditorActivity" android:label="@string/ruleeditor"></activity>
         
     </application>
 
