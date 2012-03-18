@@ -12,28 +12,9 @@ import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
-/**
- * Presents a data access object, that will handle database connections.
- * Through instances of this class one can access and modify the rules
- * stored in the database.
- * 
- * @author Jan Pretzel (jan.pretzel@deepsource.de)
- */
 public class RuleSetDataSource {
-	
-	/**
-	 * Provides methods to open, query, update and close the database.
-	 */
 	private SQLiteDatabase database;
-	
-	/**
-	 * Helps to create and update the database layout.
-	 */
 	private AgolSQLiteHelper dbHelper;
-	
-	/**
-	 * Represents all columns of our database table.
-	 */
 	private String[] allColums = { AgolSQLiteHelper.COLUMN_ID,
 			AgolSQLiteHelper.COLUMN_NAME, AgolSQLiteHelper.COLUMN_N0,
 			AgolSQLiteHelper.COLUMN_N1, AgolSQLiteHelper.COLUMN_N2,
@@ -41,36 +22,18 @@ public class RuleSetDataSource {
 			AgolSQLiteHelper.COLUMN_N5, AgolSQLiteHelper.COLUMN_N6,
 			AgolSQLiteHelper.COLUMN_N7, AgolSQLiteHelper.COLUMN_N8 };
 	
-	/**
-	 * The constructor instantiates {@link RuleSetDataSource#dbHelper}.
-	 * 
-	 * @param context The context in which the object is instantiated.
-	 */
 	public RuleSetDataSource(Context context) {
 		dbHelper = new AgolSQLiteHelper(context);
 	}
 	
-	/**
-	 * Opens a connection by giving a assigning a writable database to {@link RuleSetDataSource#database}.
-	 * 
-	 * @throws SQLException
-	 */
 	public void open() throws SQLException {
 		database = dbHelper.getWritableDatabase();
 	}
 	
-	/**
-	 * Closes any open database object.
-	 */
 	public void close() {
 		dbHelper.close();
 	}
 	
-	/**
-	 * Saves a given {@link RuleSet} object to the database given by {@link RuleSetDataSource#database}.
-	 * 
-	 * @param ruleset The RuleSet to be stored in the database.
-	 */
 	public void createRuleset(RuleSet ruleset) {
 		ContentValues values = new ContentValues();
 		values.put(AgolSQLiteHelper.COLUMN_NAME, ruleset.getName());
@@ -87,50 +50,36 @@ public class RuleSetDataSource {
 		long id = database.insert(AgolSQLiteHelper.TABLE_RULES, null, values);
 		
 		if (id == -1) {
-			Log.w(Agol.APP_NAME, "Could not insert rule into database!");
+			Log.w(Agol.APP_NAME, "Could not insert core data into database!");
 		}
 	}
 	
-	/**
-	 * Gets all rules stored in the database, the database is 
-	 * presented by {@link RuleSetDataSource#database}.
-	 * 
-	 * @return All rules as {@link RuleSet} objects in one ArrayList.
-	 */
-	public List<RuleSet> getAllRulesets() {
-		List<RuleSet> ruleSets = new ArrayList<RuleSet>();
-		Cursor cursor = database.query(AgolSQLiteHelper.TABLE_RULES, allColums, null, null, null, null, null);
-		
-		// cursor will be in front of the first entry so we 
-		// need to move it to the first item
-		cursor.moveToFirst();
-		while(!cursor.isAfterLast()) {
-			RuleSet ruleSet = cursorToRuleSet(cursor);
-			ruleSets.add(ruleSet);
-			cursor.moveToNext();
-		}
-		
-		cursor.close();
-		return ruleSets;
+public List<RuleSet> getAllRulesets() {
+	List<RuleSet> ruleSets = new ArrayList<RuleSet>();
+	Cursor cursor = database.query(
+			AgolSQLiteHelper.TABLE_RULES, 
+			allColums, 
+			null, null, 
+			null, null, null);
+	
+	// cursor will be in front of the first entry so we 
+	// need to move it to the first item
+	cursor.moveToFirst();
+	while(!cursor.isAfterLast()) {
+		RuleSet ruleSet = cursorToRuleSet(cursor);
+		ruleSets.add(ruleSet);
+		cursor.moveToNext();
 	}
 	
-	/**
-	 * Deletes a rule of the database, the database is
-	 * presented by {@link RuleSetDataSource#database}.
-	 * 
-	 * @param ruleSet The rule that will be deleted presented as RuleSet.
-	 */
+	cursor.close();
+	return ruleSets;
+}
+	
 	public void deleteRuleset(RuleSet ruleSet) {
 		long id = ruleSet.getId();
 		database.delete(AgolSQLiteHelper.TABLE_RULES, AgolSQLiteHelper.COLUMN_ID + " = " + id, null);
 	}
 	
-	/**
-	 * Writes a cursor object to {@link RuleSet} object.
-	 * 
-	 * @param cursor The cursor presenting one specific row of a query.
-	 * @return The {@link RuleSet} object derived from the cursor.
-	 */
 	private RuleSet cursorToRuleSet(Cursor cursor) {
 		RuleSet ruleSet = new RuleSet();
 		ruleSet.setId(cursor.getLong(0));
