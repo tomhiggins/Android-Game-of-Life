@@ -245,6 +245,7 @@ public class RuleEditorActivity extends Activity {
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
 				// update state of RadioGroups
+				gameRule = values.get(which).getRuleSet();
 				updateRadioButtons();
 				Toast.makeText(getApplicationContext(), items[which], Toast.LENGTH_SHORT).show();
 			}

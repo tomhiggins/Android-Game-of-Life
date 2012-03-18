@@ -32,7 +32,7 @@ public class AndroidGameOfLifeActivity extends Activity {
 		Agol.setViewportHeight(display.getHeight());
 		
 		setContentView(R.layout.main);
-		
+		 
 		agolView = (AndroidGameOfLifeView) findViewById(R.id.androidGameOfLifeView1);
 		agolView = new AndroidGameOfLifeView(this);
 		agolView.setBackgroundColor(Color.BLACK);
@@ -59,6 +59,7 @@ public class AndroidGameOfLifeActivity extends Activity {
 			break;
 			
 		case R.id.item3:
+			agolView.unlock();
 			final Intent intent = new Intent(
 					getApplicationContext(),
 					RuleEditorActivity.class);

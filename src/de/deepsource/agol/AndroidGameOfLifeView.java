@@ -189,7 +189,7 @@ public final class AndroidGameOfLifeView extends View {
 	/**
 	 * Method to initiate games RuleSet.
 	 */
-	public void initGameRules() {
+	private void initGameRules() {
 		// set Conway as initial rule 
 		// notice: we don't use the database here, because all rules can be deleted
 		// and we want the conway rule to be the initial rule come what ever will!
@@ -210,14 +210,14 @@ public final class AndroidGameOfLifeView extends View {
 	 * This method can be used
 	 * to update the games RuleSet.
 	 */
-	public void updateGameRules() {
+	private void updateGameRules() {
 		gameRule = Agol.getRuleSet();
 	}
 	
 	/**
 	 * This method will initiate our first map.
 	 */
-	public void initMap() {
+	private void initMap() {
 
 		map = new boolean[HEIGHT][WIDTH];
 		
@@ -354,6 +354,7 @@ public final class AndroidGameOfLifeView extends View {
 	 * Semaphore locker.
 	 */
 	public void lock() {
+		updateGameRules();
 		LOCKED = true;
 	}
 
